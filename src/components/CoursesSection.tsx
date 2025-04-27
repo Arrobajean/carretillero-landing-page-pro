@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Phone } from "lucide-react";
+import { Phone, MapPin, Calendar } from "lucide-react";
 
 interface Course {
   id: number;
@@ -30,7 +30,7 @@ const courses: Course[] = [
     price: "120€",
     mode: "Presencial y Online",
     location: "Todas las sedes",
-    description: "Certificación oficial para operar carretillas elevadoras.",
+    description: "Certificación oficial para operar carretillas elevadoras según normativa vigente.",
     image: "https://images.unsplash.com/photo-1566459069038-41bdf98ae5e0?q=80&w=600&auto=format",
     details: "Este curso proporciona la formación necesaria para operar carretillas elevadoras según el Real Decreto 1215/1997. Incluye teoría y práctica, con ejercicios reales en nuestras instalaciones. Al finalizar, obtendrás un certificado válido para toda España."
   },
@@ -40,7 +40,7 @@ const courses: Course[] = [
     price: "180€",
     mode: "Presencial",
     location: "Coslada y Alcorcón",
-    description: "Formación especializada para operarios de maquinaria de movimiento de tierras.",
+    description: "Formación especializada para operarios de maquinaria de movimiento de tierras con práctica real.",
     image: "https://images.unsplash.com/photo-1566275412455-45804f3ca0bc?q=80&w=600&auto=format",
     details: "Formación completa para la operación segura de maquinaria de movimiento de tierras como retroexcavadoras, excavadoras y cargadoras. Cumple con la normativa de PRL y proporciona las habilidades necesarias para el manejo profesional de esta maquinaria."
   },
@@ -50,7 +50,7 @@ const courses: Course[] = [
     price: "150€",
     mode: "Presencial",
     location: "Coslada",
-    description: "Especialización en el manejo de carretillas trilaterales para almacenes.",
+    description: "Especialización en el manejo de carretillas trilaterales para almacenes de alta eficiencia.",
     image: "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
     details: "Capacitación específica para el manejo de carretillas trilaterales utilizadas en almacenes con pasillos estrechos y gran altura. Incluye prácticas en instalaciones reales y certificación oficial al finalizar el curso."
   }
@@ -77,7 +77,14 @@ const CoursesSection = () => {
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        duration: 0.6,
+        ease: [0.4, 0, 0.2, 1]
+      } 
+    }
   };
 
   const openWhatsApp = () => {
@@ -85,7 +92,7 @@ const CoursesSection = () => {
   };
 
   return (
-    <section id="courses-section" className="bg-secondary py-20">
+    <section id="courses-section" className="bg-[#fafafa] py-20">
       <div className="container-section">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -109,24 +116,50 @@ const CoursesSection = () => {
           viewport={{ once: true }}
         >
           {courses.map((course) => (
-            <motion.div key={course.id} variants={item}>
-              <Card className="overflow-hidden h-full hover:shadow-lg transition-shadow duration-300 cursor-pointer" onClick={() => openCourseDetails(course)}>
-                <div 
-                  className="h-48 bg-gray-300 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${course.image})` }}
-                ></div>
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="font-semibold text-xl text-primary">{course.title}</h3>
-                    <Badge className="bg-accent hover:bg-accent/90">{course.price}</Badge>
+            <motion.div 
+              key={course.id} 
+              variants={item}
+              whileHover={{ 
+                y: -5,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-xl rounded-2xl">
+                <div className="relative">
+                  <div 
+                    className="h-52 bg-gray-300 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${course.image})` }}
+                  >
+                    <div className="absolute top-4 right-4">
+                      <Badge className="bg-accent hover:bg-accent/90 text-base px-4 py-1 shadow-lg">
+                        {course.price}
+                      </Badge>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-8">
+                  <h3 className="text-2xl font-bold text-primary mb-4">{course.title}</h3>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <Badge variant="outline" className="flex items-center gap-1">
+                      <Calendar size={14} />
+                      {course.mode}
+                    </Badge>
+                    <Badge variant="outline" className="flex items-center gap-1">
+                      <MapPin size={14} />
+                      {course.location}
+                    </Badge>
                   </div>
                   
-                  <div className="mb-4">
-                    <Badge variant="outline" className="mr-2 mb-2">{course.mode}</Badge>
-                    <Badge variant="outline">{course.location}</Badge>
-                  </div>
-                  
-                  <p className="text-gray-600">{course.description}</p>
+                  <p className="text-gray-600 mb-6 line-clamp-2">{course.description}</p>
+
+                  <button 
+                    onClick={() => openCourseDetails(course)}
+                    className="w-full btn-accent"
+                  >
+                    Solicitar información
+                  </button>
                 </div>
               </Card>
             </motion.div>
@@ -135,28 +168,36 @@ const CoursesSection = () => {
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>{selectedCourse?.title}</DialogTitle>
+            <DialogTitle className="text-2xl">{selectedCourse?.title}</DialogTitle>
             <DialogDescription>
               Detalles del curso
             </DialogDescription>
           </DialogHeader>
 
           {selectedCourse && (
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div 
-                className="h-48 bg-gray-300 bg-cover bg-center rounded-md"
+                className="h-52 bg-gray-300 bg-cover bg-center rounded-lg"
                 style={{ backgroundImage: `url(${selectedCourse.image})` }}
               ></div>
               
               <div className="flex flex-wrap gap-2">
-                <Badge className="bg-accent hover:bg-accent/90">{selectedCourse.price}</Badge>
-                <Badge variant="outline">{selectedCourse.mode}</Badge>
-                <Badge variant="outline">{selectedCourse.location}</Badge>
+                <Badge className="bg-accent hover:bg-accent/90">
+                  {selectedCourse.price}
+                </Badge>
+                <Badge variant="outline" className="flex items-center gap-1">
+                  <Calendar size={14} />
+                  {selectedCourse.mode}
+                </Badge>
+                <Badge variant="outline" className="flex items-center gap-1">
+                  <MapPin size={14} />
+                  {selectedCourse.location}
+                </Badge>
               </div>
               
-              <p className="text-gray-700">
+              <p className="text-gray-700 text-lg">
                 {selectedCourse.details}
               </p>
               
