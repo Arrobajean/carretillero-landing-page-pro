@@ -87,7 +87,7 @@ const WhyChooseUsSection = () => {
   };
 
   return (
-    <section id="why-choose-us-section" className="bg-white py-20">
+    <section id="why-choose-us-section" className="bg-white py-20 min-h-screen flex items-center">
       <div className="container-section">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -105,7 +105,7 @@ const WhyChooseUsSection = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
           variants={container}
           initial="hidden"
           whileInView="show"
