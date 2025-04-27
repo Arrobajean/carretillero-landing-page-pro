@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
@@ -117,7 +116,7 @@ const AboutSection = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12147.880747431756!2d-3.5354900000000003!3d40.42582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzMyLjkiTiAzwrAzMicwNy44Ilc!5e0!3m2!1ses!2ses!4v1650000000000!5m2!1ses!2ses"
               allowFullScreen
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgraded"
+              referrerPolicy="no-referrer-when-downgrade"
               className="w-full h-full"
             ></iframe>
           </motion.div>
