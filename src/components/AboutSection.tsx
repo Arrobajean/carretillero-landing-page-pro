@@ -1,6 +1,8 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Location {
@@ -45,8 +47,12 @@ const locations: Location[] = [
 const AboutSection = () => {
   const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
 
+  const handleLocationClick = (location: Location) => {
+    window.open(location.mapsUrl, '_blank', 'noopener,noreferrer');
+  };
+
   return (
-    <section id="about-section" className="bg-white py-20">
+    <section id="about-section" className="min-h-screen bg-white py-20 flex items-center">
       <div className="container-section">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
@@ -55,17 +61,18 @@ const AboutSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="heading-lg mb-6">¿Quiénes somos?</h2>
-          <p className="text-gray-700 max-w-3xl mx-auto text-lg">
-            Professional Categories SL es una empresa líder en formación especializada para operarios de maquinaria de carga y logística. 
-            Contamos con más de 10 años de experiencia formando a profesionales cualificados y ofrecemos certificación oficial
-            cumpliendo con toda la normativa vigente de prevención de riesgos laborales.
+          <h2 className="text-5xl font-bold mb-8 text-primary">¿Quiénes somos?</h2>
+          <p className="text-gray-700 max-w-2xl mx-auto text-lg leading-relaxed mb-12">
+            Professional Categories SL es una empresa líder en formación especializada para operarios 
+            de maquinaria de carga y logística. Con más de 10 años de experiencia formando a 
+            profesionales cualificados, ofrecemos certificación oficial cumpliendo con toda la 
+            normativa vigente de prevención de riesgos laborales.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           <div className="lg:col-span-2">
-            <h3 className="heading-sm mb-6">Nuestras sedes</h3>
+            <h3 className="text-2xl font-semibold text-primary mb-6">Nuestras sedes</h3>
             <div className="space-y-4">
               {locations.map((location) => (
                 <motion.div 
@@ -74,31 +81,29 @@ const AboutSection = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.4, delay: location.id * 0.1 }}
                   viewport={{ once: true }}
+                  onClick={() => handleLocationClick(location)}
                 >
-                  <button
-                    onClick={() => setSelectedLocation(location)}
-                    className={cn(
-                      "w-full text-left p-4 rounded-lg transition-all duration-200",
-                      selectedLocation?.id === location.id 
-                        ? "bg-primary text-white shadow-md" 
-                        : "bg-gray-100 hover:bg-gray-200"
-                    )}
-                  >
-                    <h4 className="font-medium text-lg">{location.name}</h4>
-                    <p className={cn(
-                      "text-sm mt-1",
-                      selectedLocation?.id === location.id ? "text-white/90" : "text-gray-600"
-                    )}>
-                      {location.address}
-                    </p>
-                  </button>
+                  <Card className={cn(
+                    "transition-all duration-300 cursor-pointer hover:shadow-lg",
+                    selectedLocation?.id === location.id ? "border-primary" : ""
+                  )}>
+                    <CardContent className="p-4">
+                      <div className="flex items-start gap-3">
+                        <MapPin className="h-5 w-5 text-primary mt-1 flex-shrink-0" />
+                        <div>
+                          <h4 className="font-medium text-lg text-primary">{location.name}</h4>
+                          <p className="text-sm text-gray-600 mt-1">{location.address}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </motion.div>
               ))}
             </div>
           </div>
 
           <motion.div 
-            className="lg:col-span-3 rounded-lg overflow-hidden shadow-lg border border-gray-200 bg-gray-100 min-h-[400px]"
+            className="lg:col-span-3 rounded-xl overflow-hidden shadow-lg min-h-[400px]"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
@@ -107,28 +112,14 @@ const AboutSection = () => {
             <iframe 
               title="Mapa de sedes"
               width="100%" 
-              height="100%" 
-              style={{ minHeight: "400px" }}
-              src="https://maps.google.com/maps?q=españa&t=&z=6&ie=UTF8&iwloc=&output=embed" 
-              frameBorder="0" 
-              scrolling="no" 
+              height="600" 
+              style={{ border: 0 }}
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12147.880747431756!2d-3.5354900000000003!3d40.42582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzMyLjkiTiAzwrAzMicwNy44Ilc!5e0!3m2!1ses!2ses!4v1650000000000!5m2!1ses!2ses"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgraded"
               className="w-full h-full"
             ></iframe>
-            
-            {selectedLocation && (
-              <div className="p-4 bg-white border-t border-gray-200">
-                <h4 className="font-medium">Sede de {selectedLocation.name}</h4>
-                <p className="text-gray-600 text-sm mb-2">{selectedLocation.address}</p>
-                <a 
-                  href={selectedLocation.mapsUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className="text-primary hover:underline text-sm font-medium"
-                >
-                  Ver en Google Maps
-                </a>
-              </div>
-            )}
           </motion.div>
         </div>
       </div>
