@@ -10,7 +10,10 @@ import {
 } from "@/components/ui/dialog";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Phone, MapPin, Calendar } from "lucide-react";
+import { MapPin, Calendar, Phone } from "lucide-react";
+import CourseLocationFilter from "./CourseLocationFilter";
+
+type Location = "Todos" | "Coslada" | "Alcorcón" | "Ciempozuelos" | "Alcantarilla";
 
 interface Course {
   id: number;
@@ -21,49 +24,75 @@ interface Course {
   description: string;
   image: string;
   details: string;
+  type: "course" | "pack";
 }
 
 const courses: Course[] = [
   {
     id: 1,
-    title: "Curso de Carretillero",
-    price: "120€",
-    mode: "Presencial y Online",
-    location: "Todas las sedes",
-    description: "Certificación oficial para operar carretillas elevadoras según normativa vigente.",
+    title: "Carretillero + Plataforma Elevadora",
+    price: "85€",
+    mode: "Presencial",
+    location: "Coslada, Alcorcón",
+    description: "Formación completa para el manejo seguro de carretillas y plataformas elevadoras.",
     image: "https://images.unsplash.com/photo-1566459069038-41bdf98ae5e0?q=80&w=600&auto=format",
-    details: "Este curso proporciona la formación necesaria para operar carretillas elevadoras según el Real Decreto 1215/1997. Incluye teoría y práctica, con ejercicios reales en nuestras instalaciones. Al finalizar, obtendrás un certificado válido para toda España."
+    details: "Curso completo que combina la formación de carretillero con plataforma elevadora. Incluye teoría y práctica con equipos reales. Certificación oficial válida en toda España.",
+    type: "course"
   },
   {
     id: 2,
-    title: "Curso de Movimiento de Tierras",
-    price: "180€",
+    title: "Carretillero + Puente Grúa",
+    price: "90€",
     mode: "Presencial",
-    location: "Coslada y Alcorcón",
-    description: "Formación especializada para operarios de maquinaria de movimiento de tierras con práctica real.",
+    location: "Coslada, Alcorcón, Ciempozuelos",
+    description: "Formación dual para el manejo profesional de carretillas y puentes grúa.",
     image: "https://images.unsplash.com/photo-1566275412455-45804f3ca0bc?q=80&w=600&auto=format",
-    details: "Formación completa para la operación segura de maquinaria de movimiento de tierras como retroexcavadoras, excavadoras y cargadoras. Cumple con la normativa de PRL y proporciona las habilidades necesarias para el manejo profesional de esta maquinaria."
+    details: "Curso que combina la formación de carretillero y puente grúa. Incluye prácticas reales y certificación oficial.",
+    type: "course"
   },
   {
     id: 3,
-    title: "Curso de Carretilla Trilateral",
-    price: "150€",
+    title: "Carretillero + Manipulador de Alimentos",
+    price: "70€",
+    mode: "Presencial y Online",
+    location: "Todas las sedes",
+    description: "Certificación combinada para manejo de carretillas y manipulación de alimentos.",
+    image: "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
+    details: "Formación integral que incluye el curso de carretillero y el certificado de manipulador de alimentos. Ideal para trabajo en almacenes alimentarios.",
+    type: "course"
+  },
+  {
+    id: 4,
+    title: "PACK TOP FORMACIÓN",
+    price: "160€",
+    mode: "Presencial",
+    location: "Coslada, Alcorcón",
+    description: "Pack completo: Carretillero + Plataforma + Puente Grúa + Radiofrecuencia + Manipulador",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=600&auto=format",
+    details: "Pack formativo completo que incluye certificación de carretillero, plataforma elevadora, puente grúa, radiofrecuencia y manipulador de alimentos. Certificación oficial para todos los cursos.",
+    type: "pack"
+  },
+  {
+    id: 5,
+    title: "PACK MEGA FORMACIÓN",
+    price: "190€",
     mode: "Presencial",
     location: "Coslada",
-    description: "Especialización en el manejo de carretillas trilaterales para almacenes de alta eficiencia.",
-    image: "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
-    details: "Capacitación específica para el manejo de carretillas trilaterales utilizadas en almacenes con pasillos estrechos y gran altura. Incluye prácticas en instalaciones reales y certificación oficial al finalizar el curso."
+    description: "Pack premium con todos los cursos + equipos de limpieza",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
+    details: "Pack formativo premium que incluye todo el Pack Top Formación más la certificación en equipos de limpieza. La formación más completa para maximizar tus oportunidades laborales.",
+    type: "pack"
   }
 ];
 
 const CoursesSection = () => {
+  const [selectedLocation, setSelectedLocation] = useState<Location>("Todos");
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const openCourseDetails = (course: Course) => {
-    setSelectedCourse(course);
-    setIsDialogOpen(true);
-  };
+  const filteredCourses = selectedLocation === "Todos"
+    ? courses
+    : courses.filter(course => course.location.includes(selectedLocation));
 
   const container = {
     hidden: { opacity: 0 },
@@ -87,8 +116,16 @@ const CoursesSection = () => {
     }
   };
 
+  const openCourseDetails = (course: Course) => {
+    setSelectedCourse(course);
+    setIsDialogOpen(true);
+  };
+
   const openWhatsApp = () => {
-    window.open(`https://wa.me/+34600000000?text=Hola, estoy interesado en el curso de ${selectedCourse?.title}. ¿Podrían darme más información?`, '_blank');
+    window.open(
+      `https://wa.me/+34600000000?text=Hola, estoy interesado en el ${selectedCourse?.title}. ¿Podrían darme más información?`,
+      '_blank'
+    );
   };
 
   return (
@@ -101,11 +138,16 @@ const CoursesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="heading-lg mb-6">Cursos Destacados</h2>
-          <p className="text-gray-700 max-w-3xl mx-auto">
-            Ofrecemos formación especializada y certificada para operadores de diferentes tipos de maquinaria. 
-            Todos nuestros cursos cumplen con la normativa vigente y proporcionan certificación oficial.
+          <h2 className="heading-lg mb-6">Nuestros Cursos</h2>
+          <p className="text-gray-700 max-w-3xl mx-auto mb-12">
+            Descubre nuestra amplia gama de cursos certificados y packs formativos diseñados 
+            para impulsar tu carrera profesional en el sector logístico e industrial.
           </p>
+
+          <CourseLocationFilter 
+            selectedLocation={selectedLocation}
+            onLocationChange={setSelectedLocation}
+          />
         </motion.div>
 
         <motion.div 
@@ -115,7 +157,7 @@ const CoursesSection = () => {
           whileInView="show"
           viewport={{ once: true }}
         >
-          {courses.map((course) => (
+          {filteredCourses.map((course) => (
             <motion.div 
               key={course.id} 
               variants={item}
@@ -135,6 +177,13 @@ const CoursesSection = () => {
                         {course.price}
                       </Badge>
                     </div>
+                    {course.type === 'pack' && (
+                      <div className="absolute top-4 left-4">
+                        <Badge variant="outline" className="bg-white/90 border-none">
+                          PACK
+                        </Badge>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -228,3 +277,4 @@ const CoursesSection = () => {
 };
 
 export default CoursesSection;
+
