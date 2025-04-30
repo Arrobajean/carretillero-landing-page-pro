@@ -5,14 +5,14 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import { cn } from "@/lib/utils";
 
 const companies = [
-  { name: "Acme Inc.", logo: "/placeholder.svg" },
-  { name: "TechCorp", logo: "/placeholder.svg" },
-  { name: "LogiTeam", logo: "/placeholder.svg" },
-  { name: "IndustriasXYZ", logo: "/placeholder.svg" },
-  { name: "Transportes España", logo: "/placeholder.svg" },
-  { name: "Global Logistics", logo: "/placeholder.svg" },
-  { name: "Express Delivery", logo: "/placeholder.svg" },
-  { name: "Almacenes Rápidos", logo: "/placeholder.svg" },
+  { name: "Mercadona", logo: "/placeholder.svg" },
+  { name: "Carrefour", logo: "/placeholder.svg" },
+  { name: "El Corte Inglés", logo: "/placeholder.svg" },
+  { name: "Día", logo: "/placeholder.svg" },
+  { name: "Eroski", logo: "/placeholder.svg" },
+  { name: "Inditex", logo: "/placeholder.svg" },
+  { name: "SEUR", logo: "/placeholder.svg" },
+  { name: "Correos Express", logo: "/placeholder.svg" },
 ];
 
 const TrustedCompaniesSection = () => {

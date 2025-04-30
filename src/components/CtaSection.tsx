@@ -8,7 +8,7 @@ const CtaSection = () => {
       <div 
         className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary z-10"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1920&auto=format')",
+          backgroundImage: "url('/lovable-uploads/8110c525-4537-4fcb-b51e-db911de38a0b.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.05,
