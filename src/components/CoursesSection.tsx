@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -18,7 +17,7 @@ import {
 import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Phone, Tools } from "lucide-react";
+import { MapPin, Calendar, Phone, Wrench } from "lucide-react";
 import CourseLocationFilter from "./CourseLocationFilter";
 
 type Location = "Todos" | "Coslada" | "Alcorcón" | "Ciempozuelos" | "Alcantarilla";
@@ -292,7 +291,7 @@ const CoursesSection = () => {
                           {course.type === 'equipment' && (
                             <div className="absolute top-4 left-4">
                               <Badge variant="outline" className="bg-white/90 border-none flex items-center gap-1">
-                                <Tools size={14} />
+                                <Wrench size={14} />
                                 EQUIPO
                               </Badge>
                             </div>
@@ -376,7 +375,7 @@ const CoursesSection = () => {
                         {course.type === 'equipment' && (
                           <div className="absolute top-3 left-3">
                             <Badge variant="outline" className="bg-white/90 border-none flex items-center gap-1">
-                              <Tools size={14} />
+                              <Wrench size={14} />
                               EQUIPO
                             </Badge>
                           </div>
@@ -433,7 +432,7 @@ const CoursesSection = () => {
                 )}
                 {selectedCourse.type === 'equipment' && (
                   <Badge variant="outline" className="flex items-center gap-1">
-                    <Tools size={14} />
+                    <Wrench size={14} />
                     Equipo
                   </Badge>
                 )}
