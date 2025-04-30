@@ -88,16 +88,16 @@ const WhyChooseUsSection = () => {
 
   return (
     <section id="why-choose-us-section" className="bg-white py-20 min-h-screen flex items-center">
-      <div className="container-section">
+      <div className="container-section mx-auto flex flex-col items-center">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-16 max-w-3xl mx-auto"
         >
           <h2 className="heading-lg mb-6">¿Por qué elegir TuCarretillero?</h2>
-          <p className="text-gray-700 max-w-3xl mx-auto">
+          <p className="text-gray-700">
             Somos líderes en formación para operarios de carretillas elevadoras 
             y maquinaria de carga. Estas son algunas de las razones por las que 
             confiar en nosotros.
@@ -105,7 +105,7 @@ const WhyChooseUsSection = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto"
           variants={container}
           initial="hidden"
           whileInView="show"

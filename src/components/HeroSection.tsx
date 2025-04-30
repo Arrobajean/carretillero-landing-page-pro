@@ -1,6 +1,6 @@
 
 import { motion } from "framer-motion";
-import { ArrowDown, WhatsappIcon } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 import { Button } from "./ui/button";
 
 const HeroSection = () => {
