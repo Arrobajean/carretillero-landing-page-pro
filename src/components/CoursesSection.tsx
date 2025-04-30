@@ -1,5 +1,13 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import {
   Dialog,
   DialogContent,
@@ -7,9 +15,10 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/ui/hover-card";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Phone } from "lucide-react";
+import { MapPin, Calendar, Phone, Tools } from "lucide-react";
 import CourseLocationFilter from "./CourseLocationFilter";
 
 type Location = "Todos" | "Coslada" | "Alcorcón" | "Ciempozuelos" | "Alcantarilla";
@@ -18,15 +27,16 @@ interface Course {
   id: number;
   title: string;
   price: string;
-  mode: "Presencial" | "Online" | "Presencial y Online";
-  location: string;
+  mode?: "Presencial" | "Online" | "Presencial y Online";
+  location?: string;
   description: string;
   image: string;
   details: string;
-  type: "course" | "pack";
+  type: "course" | "pack" | "equipment";
 }
 
 const courses: Course[] = [
+  // Courses
   {
     id: 1,
     title: "Curso Básico de Carretillero",
@@ -81,17 +91,78 @@ const courses: Course[] = [
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
     details: "Pack formativo premium que incluye todo el Pack Top Formación más la certificación en equipos de limpieza. La formación más completa para maximizar tus oportunidades laborales.",
     type: "pack"
+  },
+  // Equipment
+  {
+    id: 6,
+    title: "Carretilla Frontal",
+    price: "50€",
+    description: "Aprende a maniobrar carretillas frontales con precisión y seguridad",
+    image: "https://images.unsplash.com/photo-1566459069038-41bdf98ae5e0?q=80&w=600&auto=format",
+    details: "Formación completa para el manejo de carretillas frontales. Incluye teoría y práctica con equipos reales. Certificación válida para toda España según el RD de Prevención de Riesgos Laborales.",
+    type: "equipment"
+  },
+  {
+    id: 7,
+    title: "Carretilla Retráctil",
+    price: "50€",
+    description: "Especialización en carretillas retráctiles para almacenes",
+    image: "https://images.unsplash.com/photo-1566275412455-45804f3ca0bc?q=80&w=600&auto=format",
+    details: "Curso especializado en el manejo de carretillas retráctiles para trabajos en pasillos estrechos y almacenes. Incluye prácticas con equipos profesionales y certificación oficial.",
+    type: "equipment"
+  },
+  {
+    id: 8,
+    title: "Transpaleta Eléctrica",
+    price: "50€",
+    description: "Manejo eficiente de transpaletas eléctricas para logística",
+    image: "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
+    details: "Formación completa en el uso de transpaletas eléctricas. Aprende técnicas de manejo seguro para optimizar el transporte horizontal de mercancías en almacenes y centros logísticos.",
+    type: "equipment"
+  },
+  {
+    id: 9,
+    title: "Recogepedidos",
+    price: "50€",
+    description: "Especialización en equipos para picking en altura",
+    image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=600&auto=format",
+    details: "Curso especializado en el manejo de equipos recogepedidos para trabajos en altura. Aprende las técnicas de seguridad necesarias y obtén tu certificación oficial.",
+    type: "equipment"
+  },
+  {
+    id: 10,
+    title: "Apilador",
+    price: "50€",
+    description: "Manejo seguro de apiladores eléctricos",
+    image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
+    details: "Formación completa para el manejo de apiladores eléctricos. Incluye prácticas con equipos reales y certificación oficial válida para toda España.",
+    type: "equipment"
   }
 ];
+
+type TabType = "all" | "courses" | "equipment";
 
 const CoursesSection = () => {
   const [selectedLocation, setSelectedLocation] = useState<Location>("Todos");
   const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState<TabType>("all");
 
-  const filteredCourses = selectedLocation === "Todos"
-    ? courses
-    : courses.filter(course => course.location.includes(selectedLocation));
+  // Filter courses based on location and active tab
+  const filteredCourses = courses.filter(course => {
+    // Filter by location if it's a course type
+    const locationMatch = course.type !== "equipment" 
+      ? (selectedLocation === "Todos" || (course.location && course.location.includes(selectedLocation)))
+      : true;
+    
+    // Filter by tab type
+    const tabMatch = 
+      activeTab === "all" || 
+      (activeTab === "courses" && (course.type === "course" || course.type === "pack")) ||
+      (activeTab === "equipment" && course.type === "equipment");
+    
+    return locationMatch && tabMatch;
+  });
 
   const container = {
     hidden: { opacity: 0 },
@@ -135,84 +206,197 @@ const CoursesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="heading-lg mb-6">Nuestros Cursos</h2>
-          <p className="text-gray-700 max-w-3xl mx-auto mb-12">
-            Descubre nuestra amplia gama de cursos certificados y packs formativos diseñados 
+          <h2 className="heading-lg mb-6">Nuestros Cursos y Equipos</h2>
+          <p className="text-gray-700 max-w-3xl mx-auto mb-8">
+            Descubre nuestra amplia gama de cursos certificados, packs formativos y tipos de equipos diseñados
             para impulsar tu carrera profesional en el sector logístico e industrial.
           </p>
 
-          <CourseLocationFilter 
-            selectedLocation={selectedLocation}
-            onLocationChange={setSelectedLocation}
-          />
+          {/* Tab Navigation */}
+          <div className="flex justify-center gap-4 mb-8">
+            <button 
+              onClick={() => setActiveTab("all")}
+              className={`px-6 py-2 rounded-full transition-all ${activeTab === "all" 
+                ? "bg-primary text-white shadow-md" 
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`}
+            >
+              Todos
+            </button>
+            <button 
+              onClick={() => setActiveTab("courses")}
+              className={`px-6 py-2 rounded-full transition-all ${activeTab === "courses" 
+                ? "bg-primary text-white shadow-md" 
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`}
+            >
+              Cursos
+            </button>
+            <button 
+              onClick={() => setActiveTab("equipment")}
+              className={`px-6 py-2 rounded-full transition-all ${activeTab === "equipment" 
+                ? "bg-primary text-white shadow-md" 
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`}
+            >
+              Equipos
+            </button>
+          </div>
+
+          {/* Only show location filter for courses */}
+          {activeTab !== "equipment" && (
+            <CourseLocationFilter 
+              selectedLocation={selectedLocation}
+              onLocationChange={setSelectedLocation}
+            />
+          )}
         </motion.div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-        >
-          {filteredCourses.map((course) => (
-            <motion.div 
-              key={course.id} 
-              variants={item}
-              whileHover={{ 
-                y: -5,
-                transition: { duration: 0.2 }
-              }}
-            >
-              <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-xl rounded-2xl">
-                <div className="relative">
-                  <div 
-                    className="h-52 bg-gray-300 bg-cover bg-center"
-                    style={{ backgroundImage: `url(${course.image})` }}
-                  >
-                    <div className="absolute top-4 right-4">
-                      <Badge className="bg-accent hover:bg-accent/90 text-base px-4 py-1 shadow-lg">
+        {/* Desktop Grid View */}
+        <div className="hidden md:block">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            {filteredCourses.map((course) => (
+              <motion.div 
+                key={course.id} 
+                variants={item}
+                whileHover={{ 
+                  y: -5,
+                  transition: { duration: 0.2 }
+                }}
+              >
+                <HoverCard>
+                  <HoverCardTrigger asChild>
+                    <Card className="overflow-hidden h-full cursor-pointer transition-all duration-300 hover:shadow-xl rounded-2xl" onClick={() => openCourseDetails(course)}>
+                      <div className="relative">
+                        <div 
+                          className="h-52 bg-gray-300 bg-cover bg-center"
+                          style={{ backgroundImage: `url(${course.image})` }}
+                        >
+                          <div className="absolute top-4 right-4">
+                            <Badge className="bg-accent hover:bg-accent/90 text-base px-4 py-1 shadow-lg">
+                              {course.price}
+                            </Badge>
+                          </div>
+                          {course.type === 'pack' && (
+                            <div className="absolute top-4 left-4">
+                              <Badge variant="outline" className="bg-white/90 border-none">
+                                PACK
+                              </Badge>
+                            </div>
+                          )}
+                          {course.type === 'equipment' && (
+                            <div className="absolute top-4 left-4">
+                              <Badge variant="outline" className="bg-white/90 border-none flex items-center gap-1">
+                                <Tools size={14} />
+                                EQUIPO
+                              </Badge>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="p-8">
+                        <h3 className="text-2xl font-bold text-primary mb-4">{course.title}</h3>
+                        
+                        {course.mode && (
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            <Badge variant="outline" className="flex items-center gap-1">
+                              <Calendar size={14} />
+                              {course.mode}
+                            </Badge>
+                            {course.location && (
+                              <Badge variant="outline" className="flex items-center gap-1">
+                                <MapPin size={14} />
+                                {course.location}
+                              </Badge>
+                            )}
+                          </div>
+                        )}
+                        
+                        <p className="text-gray-600 mb-6 line-clamp-2">{course.description}</p>
+                      </div>
+                    </Card>
+                  </HoverCardTrigger>
+                  <HoverCardContent className="w-80 p-4">
+                    <div className="flex flex-col gap-2">
+                      <h4 className="text-lg font-semibold">{course.title}</h4>
+                      <p className="text-sm text-gray-600">{course.details}</p>
+                      <Badge className="self-start mt-2 bg-accent text-white">
                         {course.price}
                       </Badge>
                     </div>
-                    {course.type === 'pack' && (
-                      <div className="absolute top-4 left-4">
-                        <Badge variant="outline" className="bg-white/90 border-none">
-                          PACK
-                        </Badge>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                  </HoverCardContent>
+                </HoverCard>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
-                <div className="p-8">
-                  <h3 className="text-2xl font-bold text-primary mb-4">{course.title}</h3>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <Badge variant="outline" className="flex items-center gap-1">
-                      <Calendar size={14} />
-                      {course.mode}
-                    </Badge>
-                    <Badge variant="outline" className="flex items-center gap-1">
-                      <MapPin size={14} />
-                      {course.location}
-                    </Badge>
-                  </div>
-                  
-                  <p className="text-gray-600 mb-6 line-clamp-2">{course.description}</p>
-
-                  <button 
+        {/* Mobile Carousel View */}
+        <div className="md:hidden">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 md:-ml-4">
+              {filteredCourses.map((course) => (
+                <CarouselItem key={course.id} className="pl-2 basis-full">
+                  <motion.div
+                    variants={item}
+                    whileHover={{ y: -5 }}
+                    transition={{ duration: 0.2 }}
                     onClick={() => openCourseDetails(course)}
-                    className="w-full btn-accent"
+                    className="cursor-pointer"
                   >
-                    Solicitar información
-                  </button>
-                </div>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+                    <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg rounded-xl">
+                      <div
+                        className="h-48 bg-cover bg-center"
+                        style={{ backgroundImage: `url(${course.image})` }}
+                      >
+                        <div className="absolute top-3 right-3">
+                          <Badge className="bg-accent hover:bg-accent/90 text-base px-3 py-1 shadow-md">
+                            {course.price}
+                          </Badge>
+                        </div>
+                        {course.type === 'pack' && (
+                          <div className="absolute top-3 left-3">
+                            <Badge variant="outline" className="bg-white/90 border-none">
+                              PACK
+                            </Badge>
+                          </div>
+                        )}
+                        {course.type === 'equipment' && (
+                          <div className="absolute top-3 left-3">
+                            <Badge variant="outline" className="bg-white/90 border-none flex items-center gap-1">
+                              <Tools size={14} />
+                              EQUIPO
+                            </Badge>
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-6">
+                        <h3 className="text-xl font-bold text-primary mb-2">{course.title}</h3>
+                        <p className="text-gray-600 line-clamp-2 text-sm">{course.description}</p>
+                      </div>
+                    </Card>
+                  </motion.div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center mt-8 gap-2">
+              <CarouselPrevious className="static translate-y-0 mx-2" />
+              <CarouselNext className="static translate-y-0 mx-2" />
+            </div>
+          </Carousel>
+        </div>
       </div>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -220,7 +404,7 @@ const CoursesSection = () => {
           <DialogHeader>
             <DialogTitle className="text-2xl">{selectedCourse?.title}</DialogTitle>
             <DialogDescription>
-              Detalles del curso
+              Detalles del {selectedCourse?.type === 'equipment' ? 'equipo' : 'curso'}
             </DialogDescription>
           </DialogHeader>
 
@@ -235,14 +419,24 @@ const CoursesSection = () => {
                 <Badge className="bg-accent hover:bg-accent/90">
                   {selectedCourse.price}
                 </Badge>
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <Calendar size={14} />
-                  {selectedCourse.mode}
-                </Badge>
-                <Badge variant="outline" className="flex items-center gap-1">
-                  <MapPin size={14} />
-                  {selectedCourse.location}
-                </Badge>
+                {selectedCourse.mode && (
+                  <Badge variant="outline" className="flex items-center gap-1">
+                    <Calendar size={14} />
+                    {selectedCourse.mode}
+                  </Badge>
+                )}
+                {selectedCourse.location && (
+                  <Badge variant="outline" className="flex items-center gap-1">
+                    <MapPin size={14} />
+                    {selectedCourse.location}
+                  </Badge>
+                )}
+                {selectedCourse.type === 'equipment' && (
+                  <Badge variant="outline" className="flex items-center gap-1">
+                    <Tools size={14} />
+                    Equipo
+                  </Badge>
+                )}
               </div>
               
               <p className="text-gray-700 text-lg">
