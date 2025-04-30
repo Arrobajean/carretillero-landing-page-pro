@@ -5,7 +5,8 @@ import HeroSection from '@/components/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import CoursesSection from '@/components/CoursesSection';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
-import LegalNoticeSection from '@/components/LegalNoticeSection';
+import TrustedCompaniesSection from '@/components/TrustedCompaniesSection';
+import FAQSection from '@/components/FAQSection';
 import CtaSection from '@/components/CtaSection';
 import Footer from '@/components/Footer';
 
@@ -27,7 +28,8 @@ const Index = () => {
         <AboutSection />
         <CoursesSection />
         <WhyChooseUsSection />
-        <LegalNoticeSection />
+        <TrustedCompaniesSection />
+        <FAQSection />
         <CtaSection />
       </main>
       <Footer />

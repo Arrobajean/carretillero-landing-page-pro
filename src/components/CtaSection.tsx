@@ -1,3 +1,4 @@
+
 import { motion } from "framer-motion";
 import { Phone } from "lucide-react";
 
@@ -7,7 +8,7 @@ const CtaSection = () => {
       <div 
         className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary z-10"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1574269909862-7e1d70bb8078?q=80&w=1920&auto=format')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1920&auto=format')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.05,

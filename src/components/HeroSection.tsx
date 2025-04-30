@@ -23,7 +23,7 @@ const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-gradient-to-br from-primary via-primary/90 to-primary/80 z-10"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1610824224972-db9878a2fe2c?q=80&w=1920&auto=format')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=1920&auto=format')",
           backgroundSize: "cover",
           backgroundPosition: "center",
           opacity: 0.1,
