@@ -1,6 +1,5 @@
 
 import { motion } from "framer-motion";
-import { Badge } from "@/components/ui/badge";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
@@ -26,7 +25,6 @@ const TrustedCompaniesSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <Badge className="bg-accent mb-4">Empresas que confían</Badge>
           <h2 className="heading-lg mb-4">Empresas que han contratado a nuestros alumnos</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             +200 alumnos contratados en los últimos 6 meses por empresas líderes del sector

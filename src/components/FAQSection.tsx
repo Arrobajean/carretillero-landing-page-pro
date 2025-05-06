@@ -6,7 +6,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
 
 const faqs = [
   {
@@ -24,6 +23,22 @@ const faqs = [
   {
     question: "¿Es presencial u online?",
     answer: "El curso es 100% presencial, como exige el Artículo 19 del Real Decreto Ley de Prevención de Riesgos Laborales para la formación de operarios de maquinaria. Esto garantiza que adquieras las habilidades prácticas necesarias y obtengas una certificación válida y reconocida."
+  },
+  {
+    question: "¿Qué tipos de carretillas se enseñan a manejar?",
+    answer: "Nuestro curso cubre varios tipos de carretillas, incluyendo carretillas frontales, retráctiles, transpaletas eléctricas y apiladoras. Esto te brinda una formación completa y versátil para adaptarte a diferentes entornos laborales."
+  },
+  {
+    question: "¿La certificación es reconocida a nivel nacional?",
+    answer: "Sí, nuestro certificado cumple con todos los requisitos del Real Decreto 1215/1997 y la Ley de Prevención de Riesgos Laborales, siendo reconocido por empresas e inspecciones de trabajo en todo el territorio nacional."
+  },
+  {
+    question: "¿Ofrecen bolsa de empleo?",
+    answer: "Sí, contamos con una amplia red de empresas colaboradoras que confían en nuestros alumnos para cubrir sus vacantes. Al finalizar el curso, tendrás acceso a nuestra bolsa de empleo exclusiva con ofertas actualizadas semanalmente."
+  },
+  {
+    question: "¿Qué debo llevar el día del curso?",
+    answer: "Solo necesitas traer tu DNI o documento de identidad, ropa cómoda y calzado de seguridad si lo tienes (si no dispones de él, te lo proporcionaremos). Todo el material didáctico y equipos de protección individual están incluidos en el precio del curso."
   }
 ];
 
@@ -38,7 +53,6 @@ const FAQSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <Badge className="bg-accent mb-4">FAQ</Badge>
           <h2 className="heading-lg mb-4">Preguntas frecuentes</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Resolvemos tus dudas sobre nuestros cursos de carretillero

@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
@@ -44,10 +45,14 @@ const locations: Location[] = [
 ];
 
 const AboutSection = () => {
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null);
+  const [selectedLocation, setSelectedLocation] = useState<Location>(locations[0]);
 
   const handleLocationClick = (location: Location) => {
-    window.open(location.mapsUrl, '_blank', 'noopener,noreferrer');
+    setSelectedLocation(location);
+  };
+
+  const getMapEmbedUrl = (location: Location) => {
+    return `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12147.880747431756!2d${location.coordinates.lng}!3d${location.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzMyLjkiTiAzwrAzMicwNy44Ilc!5e0!3m2!1ses!2ses!4v1650000000000!5m2!1ses!2ses`;
   };
 
   return (
@@ -84,7 +89,7 @@ const AboutSection = () => {
                 >
                   <Card className={cn(
                     "transition-all duration-300 cursor-pointer hover:shadow-lg",
-                    selectedLocation?.id === location.id ? "border-primary" : ""
+                    selectedLocation?.id === location.id ? "border-primary border-2" : ""
                   )}>
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
@@ -113,7 +118,7 @@ const AboutSection = () => {
               width="100%" 
               height="600" 
               style={{ border: 0 }}
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12147.880747431756!2d-3.5354900000000003!3d40.42582!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDDCsDI1JzMyLjkiTiAzwrAzMicwNy44Ilc!5e0!3m2!1ses!2ses!4v1650000000000!5m2!1ses!2ses"
+              src={getMapEmbedUrl(selectedLocation)}
               allowFullScreen
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
