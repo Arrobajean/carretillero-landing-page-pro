@@ -1,7 +1,7 @@
 
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { MapPin, Calendar, Phone, MessageSquare, Wrench, Star } from 'lucide-react';
+import { MapPin, Calendar, Phone, MessageSquare, Wrench, Star, ArrowRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -20,6 +20,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import CourseCard from '@/components/CourseCard';
 
 const CourseDetail = () => {
   const { slug } = useParams();
@@ -96,6 +104,11 @@ const CourseDetail = () => {
       </div>
     );
   }
+
+  // Get related courses of the same type, excluding the current course
+  const relatedCourses = courses
+    .filter(c => c.id !== course.id && c.type === course.type)
+    .slice(0, 6);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -303,41 +316,68 @@ const CourseDetail = () => {
               </motion.div>
             </div>
             
-            {/* Related Courses Section */}
-            <div className="mt-20">
-              <h2 className="heading-md mb-10 text-center">Otros cursos que podrían interesarte</h2>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {courses
-                  .filter(c => c.id !== course.id && c.type === course.type)
-                  .slice(0, 3)
-                  .map(relatedCourse => (
-                    <Link 
-                      key={relatedCourse.id} 
-                      to={`/cursos/${relatedCourse.slug}`}
-                      className={cn(
-                        "group rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300",
-                        "flex flex-col h-full bg-white border border-gray-100"
-                      )}
-                    >
-                      <div 
-                        className="h-40 bg-cover bg-center"
-                        style={{ backgroundImage: `url(${relatedCourse.image})` }}
-                      ></div>
-                      <div className="p-4 flex flex-col flex-grow">
-                        <h3 className="font-bold text-lg mb-2 group-hover:text-accent transition-colors">
-                          {relatedCourse.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm line-clamp-2">{relatedCourse.shortDescription}</p>
-                        <div className="mt-3 flex items-center justify-between">
-                          <Badge className="bg-accent/90">{relatedCourse.price}</Badge>
-                          <span className="text-sm text-primary font-medium">Ver detalles →</span>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
+            {/* NEW REDESIGNED Related Courses Section */}
+            <motion.section 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="my-24 py-10 px-4 bg-gray-50 rounded-3xl shadow-inner"
+            >
+              <div className="text-center mb-10">
+                <h2 className="heading-md relative inline-block">
+                  Otros cursos que podrían interesarte
+                  <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-accent rounded-full"></div>
+                </h2>
+                <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                  Descubre más cursos y certificaciones para ampliar tus habilidades profesionales
+                </p>
               </div>
-            </div>
+
+              {/* Desktop Grid View */}
+              <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
+                {relatedCourses.map((relatedCourse) => (
+                  <motion.div 
+                    key={relatedCourse.id} 
+                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
+                  >
+                    <CourseCard course={relatedCourse} />
+                  </motion.div>
+                ))}
+              </div>
+
+              {/* Mobile Carousel View */}
+              <div className="md:hidden">
+                <Carousel
+                  opts={{
+                    align: "start",
+                    loop: true,
+                  }}
+                >
+                  <CarouselContent className="-ml-2">
+                    {relatedCourses.map((relatedCourse) => (
+                      <CarouselItem key={relatedCourse.id} className="pl-2 basis-[85%]">
+                        <CourseCard course={relatedCourse} />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <div className="flex justify-center mt-6 gap-2">
+                    <CarouselPrevious className="static translate-y-0 mx-2" />
+                    <CarouselNext className="static translate-y-0 mx-2" />
+                  </div>
+                </Carousel>
+              </div>
+
+              {/* View All Courses Button */}
+              <div className="mt-10 text-center">
+                <Button asChild className="px-8 py-6 text-base shadow-lg group">
+                  <Link to="/cursos" className="flex items-center gap-2">
+                    Ver todos los cursos
+                    <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
+                  </Link>
+                </Button>
+              </div>
+            </motion.section>
           </div>
         </div>
       </main>
