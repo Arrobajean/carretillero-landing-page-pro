@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const Header = () => {
@@ -14,6 +15,13 @@ const Header = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  };
 
   const scrollToContact = () => {
     const contactSection = document.getElementById("cta-section");
@@ -31,9 +39,13 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
         <div className="flex items-center">
-          <h1 className="text-xl md:text-2xl font-bold text-primary">
+          <Link 
+            to="/" 
+            onClick={scrollToTop} 
+            className="text-xl md:text-2xl font-bold text-primary hover:text-primary/90 transition-colors"
+          >
             TuCarretillero
-          </h1>
+          </Link>
         </div>
 
         <button 

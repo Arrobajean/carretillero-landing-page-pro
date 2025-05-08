@@ -16,6 +16,7 @@ export interface Course {
     answer: string;
   }>;
   type: "course" | "pack" | "equipment";
+  rating?: number;
 }
 
 const courses: Course[] = [
@@ -49,7 +50,8 @@ const courses: Course[] = [
         answer: "Sí, el certificado que obtendrás tiene validez en toda España y cumple con la normativa vigente de prevención de riesgos laborales."
       }
     ],
-    type: "course"
+    type: "course",
+    rating: 4.8
   },
   {
     id: 2,
@@ -68,7 +70,8 @@ const courses: Course[] = [
       "Prácticas combinadas",
       "Evaluación y certificación"
     ],
-    type: "course"
+    type: "course",
+    rating: 4.9
   },
   {
     id: 3,
@@ -81,7 +84,8 @@ const courses: Course[] = [
     locations: "Todas las sedes",
     image: "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
     duration: "1 día y medio (12 horas)",
-    type: "course"
+    type: "course",
+    rating: 4.7
   },
   {
     id: 4,
@@ -94,7 +98,8 @@ const courses: Course[] = [
     locations: "Coslada, Alcorcón",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=600&auto=format",
     duration: "5 días (40 horas)",
-    type: "pack"
+    type: "pack",
+    rating: 5.0
   },
   {
     id: 5,
@@ -107,7 +112,8 @@ const courses: Course[] = [
     locations: "Coslada",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
     duration: "6 días (48 horas)",
-    type: "pack"
+    type: "pack",
+    rating: 4.9
   },
   // Equipment
   {
@@ -121,7 +127,8 @@ const courses: Course[] = [
     locations: "Todas las sedes",
     image: "https://images.unsplash.com/photo-1566459069038-41bdf98ae5e0?q=80&w=600&auto=format",
     duration: "1 día (8 horas)",
-    type: "equipment"
+    type: "equipment",
+    rating: 4.8
   },
   {
     id: 7,
@@ -134,7 +141,8 @@ const courses: Course[] = [
     locations: "Coslada, Alcorcón",
     image: "https://images.unsplash.com/photo-1566275412455-45804f3ca0bc?q=80&w=600&auto=format",
     duration: "1 día (8 horas)",
-    type: "equipment"
+    type: "equipment",
+    rating: 4.7
   },
   {
     id: 8,
@@ -147,7 +155,8 @@ const courses: Course[] = [
     locations: "Todas las sedes",
     image: "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
     duration: "1 día (8 horas)",
-    type: "equipment"
+    type: "equipment",
+    rating: 4.6
   },
   {
     id: 9,
@@ -160,7 +169,8 @@ const courses: Course[] = [
     locations: "Coslada, Alcorcón",
     image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=600&auto=format",
     duration: "1 día (8 horas)",
-    type: "equipment"
+    type: "equipment",
+    rating: 4.7
   },
   {
     id: 10,
@@ -173,7 +183,8 @@ const courses: Course[] = [
     locations: "Todas las sedes",
     image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
     duration: "1 día (8 horas)",
-    type: "equipment"
+    type: "equipment",
+    rating: 4.6
   }
 ];
 

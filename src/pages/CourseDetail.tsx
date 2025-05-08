@@ -1,7 +1,7 @@
 
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { MapPin, Calendar, Phone, MessageSquare, Wrench } from 'lucide-react';
+import { MapPin, Calendar, Phone, MessageSquare, Wrench, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -12,6 +12,14 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import courses, { Course } from '@/data/courses';
 import { cn } from '@/lib/utils';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const CourseDetail = () => {
   const { slug } = useParams();
@@ -30,6 +38,24 @@ const CourseDetail = () => {
     
     setLoading(false);
   }, [slug]);
+
+  // Function to render rating stars based on the course's rating
+  const renderRating = (rating: number = 4.8) => {
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 >= 0.5;
+    
+    return (
+      <div className="flex items-center gap-1">
+        {[...Array(fullStars)].map((_, i) => (
+          <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
+        ))}
+        {hasHalfStar && (
+          <Star size={18} className="fill-yellow-400 text-yellow-400" />
+        )}
+        <span className="text-sm font-medium ml-1 text-gray-700">{rating.toFixed(1)}</span>
+      </div>
+    );
+  };
 
   const openWhatsApp = () => {
     if (course) {
@@ -77,22 +103,26 @@ const CourseDetail = () => {
       <main className="flex-grow">
         <div className="bg-gradient-to-b from-gray-50 to-white pt-10 md:pt-16">
           <div className="container-section">
-            {/* Breadcrumbs */}
-            <nav className="text-sm mb-8 text-gray-500">
-              <ol className="flex flex-wrap items-center gap-2">
-                <li>
-                  <Link to="/" className="hover:text-primary">Inicio</Link>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span>/</span>
-                  <Link to="/#courses-section" className="hover:text-primary">Cursos</Link>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span>/</span>
-                  <span className="text-gray-800 font-medium">{course.title}</span>
-                </li>
-              </ol>
-            </nav>
+            {/* Breadcrumbs using Shadcn UI */}
+            <Breadcrumb className="mb-8">
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/">Inicio</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbLink asChild>
+                    <Link to="/cursos">Cursos</Link>
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>{course.title}</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Main Content - 2/3 */}
@@ -103,6 +133,14 @@ const CourseDetail = () => {
                 className="lg:col-span-2"
               >
                 <h1 className="heading-lg mb-6">{course.title}</h1>
+                
+                {/* Rating display */}
+                <div className="flex items-center gap-2 mb-4">
+                  {renderRating(course.rating)}
+                  <span className="text-sm text-gray-500">
+                    ({Math.floor(Math.random() * 50) + 50} valoraciones)
+                  </span>
+                </div>
                 
                 {/* Image */}
                 <div className="rounded-xl overflow-hidden mb-8 shadow-md">

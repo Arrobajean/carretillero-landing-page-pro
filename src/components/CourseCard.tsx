@@ -93,7 +93,7 @@ const CourseCard = ({ course }: CourseCardProps) => {
             {/* Price and Rating Row */}
             <div className="flex justify-between items-center mb-4">
               <div className="text-accent font-bold text-xl">{course.price}</div>
-              {renderRating(4.8)}
+              {renderRating(course.rating || 4.8)}
             </div>
             
             {/* CTA Button */}

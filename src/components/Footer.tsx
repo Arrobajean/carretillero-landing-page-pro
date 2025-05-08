@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-left">
           <div>
             <h2 className="font-bold text-xl mb-4">TuCarretillero</h2>
             <p className="text-gray-400 mb-4">
@@ -18,7 +18,7 @@ const Footer = () => {
 
           <div>
             <h3 className="font-bold mb-4">Contacto</h3>
-            <div className="space-y-3">
+            <div className="space-y-3 flex flex-col items-center md:items-start">
               <div className="flex items-center">
                 <Phone size={18} className="mr-2 text-accent" />
                 <a href="tel:+34600000000" className="text-gray-400 hover:text-white transition-colors">
@@ -36,7 +36,7 @@ const Footer = () => {
 
           <div>
             <h3 className="font-bold mb-4">Sedes</h3>
-            <ul className="text-gray-400 space-y-2">
+            <ul className="text-gray-400 space-y-2 flex flex-col items-center md:items-start">
               <li>Coslada</li>
               <li>Alcorcón</li>
               <li>Ciempozuelos</li>
@@ -46,7 +46,7 @@ const Footer = () => {
 
           <div>
             <h3 className="font-bold mb-4">Síguenos</h3>
-            <div className="flex space-x-4">
+            <div className="flex space-x-4 justify-center md:justify-start">
               <a href="#" aria-label="Facebook" className="text-gray-400 hover:text-white transition-colors">
                 <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"></path>
@@ -67,10 +67,10 @@ const Footer = () => {
         </div>
 
         <div className="mt-12 border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-400 text-sm">
+          <p className="text-gray-400 text-sm text-center md:text-left">
             &copy; {currentYear} Professional Categories SL. Todos los derechos reservados.
           </p>
-          <div className="mt-4 md:mt-0 flex space-x-6 text-sm text-gray-400">
+          <div className="mt-4 md:mt-0 flex flex-wrap justify-center space-x-4 space-x-6 text-sm text-gray-400">
             <a href="#" className="hover:text-white transition-colors">Política de Privacidad</a>
             <a href="#" className="hover:text-white transition-colors">Términos de Uso</a>
             <a href="#" className="hover:text-white transition-colors">Cookies</a>
