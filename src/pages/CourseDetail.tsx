@@ -33,6 +33,8 @@ const CourseDetail = () => {
   const { slug } = useParams();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userRating, setUserRating] = useState<number | null>(null);
+  const [hoverRating, setHoverRating] = useState<number | null>(null);
   const { toast } = useToast();
   
   useEffect(() => {
@@ -61,6 +63,56 @@ const CourseDetail = () => {
           <Star size={18} className="fill-yellow-400 text-yellow-400" />
         )}
         <span className="text-sm font-medium ml-1 text-gray-700">{rating.toFixed(1)}</span>
+      </div>
+    );
+  };
+
+  // Function to handle user rating
+  const handleRating = (rating: number) => {
+    setUserRating(rating);
+    
+    toast({
+      title: "¡Gracias por tu valoración!",
+      description: `Has valorado este curso con ${rating} ${rating === 1 ? 'estrella' : 'estrellas'}.`,
+    });
+
+    // In a real app, you would send this rating to your backend
+    console.log(`User rated course ${course?.id} with ${rating} stars`);
+  };
+
+  // Function to render interactive rating stars for user input
+  const renderUserRatingStars = () => {
+    return (
+      <div className="flex items-center gap-3">
+        <span className="text-sm font-medium text-gray-700">Valora este curso:</span>
+        <div className="flex gap-1">
+          {[1, 2, 3, 4, 5].map((star) => (
+            <button
+              key={star}
+              type="button"
+              onClick={() => handleRating(star)}
+              onMouseEnter={() => setHoverRating(star)}
+              onMouseLeave={() => setHoverRating(null)}
+              className="focus:outline-none"
+              aria-label={`Puntuar ${star} ${star === 1 ? 'estrella' : 'estrellas'}`}
+            >
+              <Star 
+                size={24} 
+                className={cn(
+                  "transition-all duration-200",
+                  (hoverRating !== null ? star <= hoverRating : star <= (userRating || 0))
+                    ? "fill-yellow-400 text-yellow-400 scale-110"
+                    : "text-gray-300 hover:text-yellow-400"
+                )}
+              />
+            </button>
+          ))}
+        </div>
+        {userRating && (
+          <span className="text-sm font-medium text-accent">
+            ¡Gracias por tu valoración!
+          </span>
+        )}
       </div>
     );
   };
@@ -132,7 +184,7 @@ const CourseDetail = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>{course.title}</BreadcrumbPage>
+                  <BreadcrumbPage>{course?.title}</BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
@@ -145,11 +197,11 @@ const CourseDetail = () => {
                 transition={{ duration: 0.5 }}
                 className="lg:col-span-2"
               >
-                <h1 className="heading-lg mb-6">{course.title}</h1>
+                <h1 className="heading-lg mb-6">{course?.title}</h1>
                 
                 {/* Rating display */}
                 <div className="flex items-center gap-2 mb-4">
-                  {renderRating(course.rating)}
+                  {course && renderRating(course.rating)}
                   <span className="text-sm text-gray-500">
                     ({Math.floor(Math.random() * 50) + 50} valoraciones)
                   </span>
@@ -158,10 +210,16 @@ const CourseDetail = () => {
                 {/* Image */}
                 <div className="rounded-xl overflow-hidden mb-8 shadow-md">
                   <img 
-                    src={course.image} 
-                    alt={course.title} 
+                    src={course?.image} 
+                    alt={course?.title} 
                     className="w-full h-auto object-cover"
                   />
+                </div>
+
+                {/* User Rating Section - NEW */}
+                <div className="bg-gray-50 rounded-xl p-6 mb-8 border border-gray-100 shadow-sm">
+                  <h3 className="text-lg font-semibold mb-4">¿Qué te ha parecido este curso?</h3>
+                  {renderUserRatingStars()}
                 </div>
                 
                 {/* Tabs for mobile */}
@@ -189,7 +247,7 @@ const CourseDetail = () => {
                 {/* Description */}
                 <div className="prose max-w-none mb-8">
                   <h2 className="text-2xl font-semibold mb-4">Descripción del curso</h2>
-                  {course.longDescription.split('\n\n').map((paragraph, index) => (
+                  {course?.longDescription.split('\n\n').map((paragraph, index) => (
                     <p key={index} className="mb-4 text-gray-700 leading-relaxed">
                       {paragraph}
                     </p>
@@ -197,7 +255,7 @@ const CourseDetail = () => {
                 </div>
                 
                 {/* Syllabus if available */}
-                {course.syllabus && course.syllabus.length > 0 && (
+                {course?.syllabus && course.syllabus.length > 0 && (
                   <div className="mb-8">
                     <h2 className="text-2xl font-semibold mb-4">Contenido del curso</h2>
                     <ul className="space-y-2">
@@ -212,7 +270,7 @@ const CourseDetail = () => {
                 )}
                 
                 {/* FAQs if available */}
-                {course.faqs && course.faqs.length > 0 && (
+                {course?.faqs && course.faqs.length > 0 && (
                   <div className="mb-8">
                     <h2 className="text-2xl font-semibold mb-4">Preguntas frecuentes</h2>
                     <Accordion type="single" collapsible className="w-full">
@@ -242,14 +300,14 @@ const CourseDetail = () => {
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xl font-bold">Información del curso</h2>
                     <Badge className="bg-accent text-white text-lg px-3 py-1">
-                      {course.price}
+                      {course?.price}
                     </Badge>
                   </div>
                   
                   <Separator className="my-4" />
                   
                   <div className="space-y-4 mb-6">
-                    {course.mode && (
+                    {course?.mode && (
                       <div className="flex items-start gap-3">
                         <Calendar size={20} className="text-primary flex-shrink-0 mt-1" />
                         <div>
@@ -259,7 +317,7 @@ const CourseDetail = () => {
                       </div>
                     )}
                     
-                    {course.locations && (
+                    {course?.locations && (
                       <div className="flex items-start gap-3">
                         <MapPin size={20} className="text-primary flex-shrink-0 mt-1" />
                         <div>
@@ -269,7 +327,7 @@ const CourseDetail = () => {
                       </div>
                     )}
                     
-                    {course.duration && (
+                    {course?.duration && (
                       <div className="flex items-start gap-3">
                         <Calendar size={20} className="text-primary flex-shrink-0 mt-1" />
                         <div>
@@ -279,7 +337,7 @@ const CourseDetail = () => {
                       </div>
                     )}
                     
-                    {course.type && (
+                    {course?.type && (
                       <div className="flex items-start gap-3">
                         <Wrench size={20} className="text-primary flex-shrink-0 mt-1" />
                         <div>
@@ -316,7 +374,7 @@ const CourseDetail = () => {
               </motion.div>
             </div>
             
-            {/* NEW REDESIGNED Related Courses Section */}
+            {/* Related Courses Section */}
             <motion.section 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
