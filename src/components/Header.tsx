@@ -51,8 +51,8 @@ const Header = () => {
         <button 
           onClick={scrollToContact} 
           className={cn(
-            "btn-primary",
-            isScrolled ? "py-2 px-5" : "py-3 px-6"
+            "bg-accent hover:bg-accent/90 text-white font-medium rounded-md transition-all",
+            isScrolled ? "py-2 px-5 text-sm" : "py-3 px-6"
           )}
         >
           Contáctanos
