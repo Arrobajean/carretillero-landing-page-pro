@@ -1,14 +1,14 @@
 
 import { useEffect } from 'react';
-import Header from '@/components/Header';
-import HeroSection from '@/components/HeroSection';
+import Header from '@/components/layout/Header';
+import HeroSection from '@/components/sections/HeroSection';
 import AboutSection from '@/components/AboutSection';
 import CoursesSection from '@/components/CoursesSection';
 import WhyChooseUsSection from '@/components/WhyChooseUsSection';
 import TrustedCompaniesSection from '@/components/TrustedCompaniesSection';
 import FAQSection from '@/components/FAQSection';
 import CtaSection from '@/components/CtaSection';
-import Footer from '@/components/Footer';
+import Footer from '@/components/layout/Footer';
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const Index = () => {
