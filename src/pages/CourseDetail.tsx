@@ -1,7 +1,7 @@
 
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { MapPin, Calendar, Phone, MessageSquare, Wrench, Star, ArrowRight } from 'lucide-react';
+import { MapPin, Calendar, Phone, MessageSquare, Wrench, Star } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -9,10 +9,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import courses, { Course } from '@/data/courses';
 import { cn } from '@/lib/utils';
+import RatingStars from '@/components/courses/RatingStars';
+import CourseSlider from '@/components/courses/CourseSlider';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -21,14 +23,6 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import CourseCard from '@/components/CourseCard';
 
 const CourseDetail = () => {
   const { slug } = useParams();
@@ -55,25 +49,6 @@ const CourseDetail = () => {
     
     setLoading(false);
   }, [slug]);
-
-  // Function to render rating stars based on the rating
-  const renderRating = (rating: number = 4.8) => {
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 >= 0.5;
-    
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(fullStars)].map((_, i) => (
-          <Star key={i} size={18} className="fill-yellow-400 text-yellow-400" />
-        ))}
-        {hasHalfStar && (
-          <Star size={18} className="fill-yellow-400 text-yellow-400" />
-        )}
-        <span className="text-sm font-medium ml-1 text-gray-700">{rating.toFixed(1)}</span>
-        <span className="text-sm text-gray-500 ml-1">({votes} valoraciones)</span>
-      </div>
-    );
-  };
 
   // Function to handle user rating
   const handleRating = (rating: number) => {
@@ -191,19 +166,15 @@ const CourseDetail = () => {
             <Breadcrumb className="py-4 mb-6">
               <BreadcrumbList className="animate-fade-in">
                 <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/" className="flex items-center hover:text-primary transition-colors">
-                      <span>Inicio</span>
-                    </Link>
-                  </BreadcrumbLink>
+                  <Link to="/" className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground">
+                    Inicio
+                  </Link>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link to="/cursos" className="flex items-center hover:text-primary transition-colors">
-                      <span>Cursos</span>
-                    </Link>
-                  </BreadcrumbLink>
+                  <Link to="/cursos" className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground">
+                    Cursos
+                  </Link>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
@@ -225,7 +196,7 @@ const CourseDetail = () => {
                 
                 {/* Enhanced Rating display */}
                 <div className="flex items-center gap-2 mb-6">
-                  {renderRating(averageRating)}
+                  <RatingStars rating={averageRating} votes={votes} />
                 </div>
                 
                 {/* Enhanced Image */}
@@ -409,71 +380,15 @@ const CourseDetail = () => {
             </div>
             
             {/* Related Courses Section - Enhanced */}
-            <motion.section 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-              className="my-24 py-12 px-6 bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl shadow-inner"
-            >
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
-                  Otros cursos que podrían interesarte
-                </h2>
-                <div className="h-1.5 w-24 bg-accent mx-auto rounded-full mb-4"></div>
-                <p className="text-gray-700 mt-4 max-w-2xl mx-auto">
-                  Descubre más cursos y certificaciones para ampliar tus habilidades profesionales
-                </p>
-              </div>
-
-              {/* Desktop Grid View - Enhanced */}
-              <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-                {relatedCourses.map((relatedCourse) => (
-                  <motion.div 
-                    key={relatedCourse.id} 
-                    whileHover={{ y: -5, transition: { duration: 0.2 } }}
-                    className="h-full"
-                  >
-                    <CourseCard course={relatedCourse} />
-                  </motion.div>
-                ))}
-              </div>
-
-              {/* Mobile Carousel View - Enhanced */}
-              <div className="md:hidden">
-                <Carousel
-                  opts={{
-                    align: "start",
-                    loop: true,
-                  }}
-                  className="w-full max-w-sm mx-auto"
-                >
-                  <CarouselContent className="-ml-2">
-                    {relatedCourses.map((relatedCourse) => (
-                      <CarouselItem key={relatedCourse.id} className="pl-2 basis-[100%]">
-                        <div className="p-1">
-                          <CourseCard course={relatedCourse} />
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <div className="flex justify-center mt-6 gap-2">
-                    <CarouselPrevious className="static translate-y-0 mx-2" />
-                    <CarouselNext className="static translate-y-0 mx-2" />
-                  </div>
-                </Carousel>
-              </div>
-
-              {/* View All Courses Button - Enhanced */}
-              <div className="mt-12 text-center">
-                <Button asChild className="px-8 py-6 text-base shadow-lg group bg-primary hover:bg-primary/90">
-                  <Link to="/cursos" className="flex items-center gap-2 font-medium">
-                    Ver todos los cursos
-                    <ArrowRight className="group-hover:translate-x-1 transition-transform" size={18} />
-                  </Link>
-                </Button>
-              </div>
-            </motion.section>
+            <div className="my-12">
+              <CourseSlider
+                courses={relatedCourses}
+                title="Otros cursos que podrían interesarte"
+                description="Descubre más cursos y certificaciones para ampliar tus habilidades profesionales"
+                autoRotate={true}
+                autoRotateInterval={6000}
+              />
+            </div>
           </div>
         </div>
       </main>

@@ -8,7 +8,7 @@ import Index from "./pages/Index";
 import CourseDetail from "./pages/CourseDetail";
 import CoursesPage from "./pages/CoursesPage";
 import NotFound from "./pages/NotFound";
-import CookieBanner from "./components/layout/CookieBanner";
+import CookieModal from "./components/layout/CookieModal";
 
 // Legal Pages
 import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
@@ -37,7 +37,7 @@ const App = () => (
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
-      <CookieBanner />
+      <CookieModal />
     </TooltipProvider>
   </QueryClientProvider>
 );
