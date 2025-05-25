@@ -1,5 +1,5 @@
 
-import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbLink, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
+import { Breadcrumb, BreadcrumbList, BreadcrumbItem, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
 import { Cookie } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -11,7 +11,7 @@ const Cookies = () => {
       <Header />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4 md:px-8">
-          <Breadcrumb className="mb-8">
+          <Breadcrumb className="mb-6">
             <BreadcrumbList>
               <BreadcrumbItem>
                 <Link to="/" className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground">Inicio</Link>
@@ -29,21 +29,21 @@ const Cookies = () => {
               <h1 className="text-3xl font-bold text-gray-900">Política de Cookies</h1>
             </div>
 
-            <div className="prose prose-gray max-w-none">
-              <p className="text-gray-600 mb-6">
+            <div className="prose prose-gray max-w-none space-y-6">
+              <p className="text-gray-600 text-sm">
                 Última actualización: 9 de mayo de 2025
               </p>
 
-              <section className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">1. ¿Qué son las Cookies?</h2>
-                <p className="text-gray-600 mb-4">
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">1. ¿Qué son las Cookies?</h2>
+                <p className="text-gray-600">
                   Las cookies son pequeños archivos de texto que los sitios web colocan en su dispositivo cuando los visita. Se utilizan ampliamente para hacer que los sitios web funcionen, o funcionen de manera más eficiente, así como para proporcionar información a los propietarios del sitio.
                 </p>
               </section>
 
-              <section className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">2. Tipos de Cookies que Utilizamos</h2>
-                <div className="space-y-4">
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">2. Tipos de Cookies que Utilizamos</h2>
+                <div className="space-y-3">
                   <div>
                     <h3 className="font-semibold text-gray-700 mb-2">Cookies Estrictamente Necesarias</h3>
                     <p className="text-gray-600">
@@ -71,9 +71,9 @@ const Cookies = () => {
                 </div>
               </section>
 
-              <section className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">3. Cómo Controlar las Cookies</h2>
-                <p className="text-gray-600 mb-4">
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">3. Cómo Controlar las Cookies</h2>
+                <p className="text-gray-600 mb-3">
                   Usted puede controlar y administrar las cookies de varias maneras. Tenga en cuenta que eliminar o bloquear cookies puede afectar su experiencia de usuario y es posible que no pueda acceder a ciertas partes de nuestro sitio web.
                 </p>
                 <p className="text-gray-600">
@@ -81,15 +81,15 @@ const Cookies = () => {
                 </p>
               </section>
 
-              <section className="mb-8">
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">4. Cookies de Terceros</h2>
-                <p className="text-gray-600 mb-4">
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">4. Cookies de Terceros</h2>
+                <p className="text-gray-600">
                   Además de nuestras propias cookies, también podemos utilizar varias cookies de terceros para informar estadísticas del uso del sitio, entregar anuncios en y a través del Servicio, etc.
                 </p>
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">5. Contacto</h2>
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">5. Contacto</h2>
                 <p className="text-gray-600">
                   Si tiene alguna pregunta sobre nuestro uso de cookies, comuníquese con nosotros en <a href="mailto:info@tucarretillero.com" className="text-primary hover:underline">info@tucarretillero.com</a>.
                 </p>
