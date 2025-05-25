@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,17 +26,15 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/cursos" element={<CoursesPage />} />
           <Route path="/cursos/:slug" element={<CourseDetail />} />
-          
-          {/* Legal Pages */}
           <Route path="/politica-privacidad" element={<PrivacyPolicy />} />
           <Route path="/terminos-condiciones" element={<Terms />} />
           <Route path="/politica-cookies" element={<Cookies />} />
-          
-          {/* Catch-all route */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+
+        {/* ✅ MOVIDO DENTRO DEL ROUTER */}
+        <CookieModal />
       </BrowserRouter>
-      <CookieModal />
     </TooltipProvider>
   </QueryClientProvider>
 );

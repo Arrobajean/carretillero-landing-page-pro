@@ -1,47 +1,25 @@
-
-import { useState, useEffect } from 'react';
-import { ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-
-const heroImages = [
-  '/images/hero-1.jpg',
-  '/images/hero-2.jpg',
-  '/images/hero-3.jpg'
-];
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { useHeroImages } from "@/hooks/useHeroImages";
+import { scrollToSection } from "@/utils/scrollToSection";
 
 const HeroSection = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // Auto-rotate hero images
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % heroImages.length);
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, []);
-
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('cta-section');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const { currentImageIndex, heroImages } = useHeroImages();
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
-      {/* Background with overlay */}
+      {/* Background con transición */}
       <div className="absolute inset-0 z-0">
         {heroImages.map((image, index) => (
           <div
             key={index}
             className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-            style={{ 
+            style={{
               opacity: index === currentImageIndex ? 1 : 0,
               backgroundImage: `url(${image})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
+              backgroundSize: "cover",
+              backgroundPosition: "center",
             }}
           />
         ))}
@@ -58,32 +36,33 @@ const HeroSection = () => {
           >
             Formación profesional en carretillas y maquinaria
           </motion.h1>
-          
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-lg md:text-xl text-gray-200 mb-8"
           >
-            Especialistas en capacitación para operarios de maquinaria con certificación oficial.
-            Cursos prácticos con instructores expertos y la mejor relación calidad-precio.
+            Especialistas en capacitación para operarios de maquinaria con
+            certificación oficial. Cursos prácticos con instructores expertos y
+            la mejor relación calidad-precio.
           </motion.p>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4"
           >
-            <Button 
-              size="lg" 
-              onClick={scrollToContact}
+            <Button
+              size="lg"
+              onClick={() => scrollToSection("cta-section")}
               className="bg-accent hover:bg-accent/90 text-white font-medium"
             >
               Solicitar información
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            
+
             <Button
               variant="outline"
               size="lg"
