@@ -1,23 +1,22 @@
-
-import { useEffect } from 'react';
-import Header from '@/components/layout/Header';
-import HeroSection from '@/components/sections/HeroSection';
-import AboutSection from '@/components/AboutSection';
-import CoursesSection from '@/components/CoursesSection';
-import WhyChooseUsSection from '@/components/WhyChooseUsSection';
-import TrustedCompaniesSection from '@/components/TrustedCompaniesSection';
-import FAQSection from '@/components/FAQSection';
-import CtaSection from '@/components/CtaSection';
-import Footer from '@/components/layout/Footer';
+import { useEffect } from "react";
+import Header from "@/components/layout/Header";
+import HeroSection from "@/components/sections/HeroSection";
+import AboutSection from "@/components/sections/AboutSection";
+import CoursesSection from "@/components/sections/CoursesSection";
+import WhyChooseUsSection from "@/components/sections/WhyChooseUsSection";
+import TrustedCompaniesSection from "@/components/sections/TrustedCompaniesSection";
+import FAQSection from "@/components/sections/FAQSection";
+import CtaSection from "@/components/sections/CtaSection";
+import Footer from "@/components/layout/Footer";
 import { motion, useScroll, useSpring } from "framer-motion";
 
 const Index = () => {
   // Set up smooth scrolling behavior
   useEffect(() => {
-    document.documentElement.style.scrollBehavior = 'smooth';
-    
+    document.documentElement.style.scrollBehavior = "smooth";
+
     return () => {
-      document.documentElement.style.scrollBehavior = 'auto';
+      document.documentElement.style.scrollBehavior = "auto";
     };
   }, []);
 
@@ -26,7 +25,7 @@ const Index = () => {
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
-    restDelta: 0.001
+    restDelta: 0.001,
   });
 
   return (
@@ -36,7 +35,7 @@ const Index = () => {
         className="fixed top-0 left-0 right-0 h-1 bg-accent z-50 origin-left"
         style={{ scaleX }}
       />
-      
+
       <Header />
       <main>
         <HeroSection />
