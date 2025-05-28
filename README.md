@@ -4,7 +4,7 @@ Este proyecto es un rediseño completo del sitio web de **Tu Carretillero**, una
 
 ## 🌐 Demo
 
-👉 [Visita el sitio web publicado en GitHub Pages](https://404studiosdigital.github.io/tu-carretillero)
+👉 [Visita el sitio web publicado en Vercel](https://tucarretillero.vercel.app)
 
 ## ✨ Características principales
 
