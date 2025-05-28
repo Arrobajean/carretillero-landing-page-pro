@@ -40,13 +40,15 @@ bash
 ├── vite.config.ts         # Configuración Vite
 ├── tsconfig.json          # Configuración TypeScript
 └── ...
-🚀 Cómo correr el proyecto localmente
-bash
-Copiar
-Editar
 # 1. Clona el repositorio
 git clone https://github.com/tu-usuario/tu-carretillero.git
 cd tu-carretillero
+
+# 2. Instala las dependencias
+npm install
+
+# 3. Inicia el servidor de desarrollo
+npm run dev
 
 # 2. Instala las dependencias
 npm install
