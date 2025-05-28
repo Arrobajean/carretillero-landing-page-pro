@@ -1,73 +1,74 @@
-# Welcome to your Lovable project
+# 🛠️ Tu Carretillero — Rediseño Web por 404 Studios
 
-## Project info
+Este proyecto es un rediseño completo del sitio web de **Tu Carretillero**, una empresa dedicada a la formación y servicios relacionados con carretillas elevadoras. El rediseño fue realizado por [404 Studios](https://www.404studios.digital), con un enfoque moderno, responsivo y accesible, mejorando significativamente la experiencia de usuario y la estética general.
 
-**URL**: https://lovable.dev/projects/4876c795-1b0d-4777-a4f5-d1438e741087
+## 🌐 Demo
 
-## How can I edit this code?
+👉 [Visita el sitio web publicado en GitHub Pages](https://404studiosdigital.github.io/tu-carretillero)
 
-There are several ways of editing your application.
+## ✨ Características principales
 
-**Use Lovable**
+- 🔥 Sitio 100% responsive
+- 🎨 Diseño renovado con enfoque profesional
+- 🌙 Soporte para modo claro/oscuro
+- ⚡ Animaciones suaves con **Framer Motion**
+- 🧠 Código modular y reutilizable
+- 💡 Buenas prácticas de accesibilidad y SEO técnico básico
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4876c795-1b0d-4777-a4f5-d1438e741087) and start prompting.
+## 🧰 Tecnologías y herramientas
 
-Changes made via Lovable will be committed automatically to this repo.
+- **React 18** + **TypeScript**
+- **Vite** para desarrollo ultrarrápido
+- **Tailwind CSS** para estilos utilitarios personalizados
+- **Framer Motion** para animaciones
+- **Lucide Icons** para íconos accesibles
+- **ShadCN UI** como sistema de componentes reutilizables
+- **ESLint + Prettier** para mantener código limpio
 
-**Use your preferred IDE**
+## 📁 Estructura del proyecto
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+bash
+├── public/
+├── src/
+│   ├── components/        # Componentes reutilizables
+│   ├── pages/             # Páginas principales
+│   ├── hooks/             # Hooks personalizados
+│   ├── lib/               # Utilidades compartidas
+│   ├── index.tsx          # Punto de entrada
+│   └── ...
+├── tailwind.config.ts     # Configuración Tailwind
+├── vite.config.ts         # Configuración Vite
+├── tsconfig.json          # Configuración TypeScript
+└── ...
+🚀 Cómo correr el proyecto localmente
+bash
+Copiar
+Editar
+# 1. Clona el repositorio
+git clone https://github.com/tu-usuario/tu-carretillero.git
+cd tu-carretillero
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+# 2. Instala las dependencias
+npm install
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# 3. Inicia el servidor de desarrollo
 npm run dev
-```
+🛠 Scripts disponibles
+npm run dev: Inicia el servidor de desarrollo
 
-**Edit a file directly in GitHub**
+npm run build: Genera una build optimizada
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+npm run preview: Previsualiza la build
 
-**Use GitHub Codespaces**
+npm run lint: Revisa errores de linting
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+🧠 Autor
+👤 Jean Paul Castañeda Huerta
+Desarrollador Web Junior — 404 Studios
 
-## What technologies are used for this project?
+🌐 Web: https://www.404studios.digital
 
-This project is built with:
+📧 Email: jean.castanedah@404studios.digital
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/4876c795-1b0d-4777-a4f5-d1438e741087) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+📄 Licencia
+Este proyecto es de código abierto bajo la licencia MIT.
