@@ -32,11 +32,11 @@ const Header = ({ variant = "default" }: HeaderProps) => {
     <header
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        variant === "black" 
-          ? "bg-black shadow-md py-6" 
-          : isScrolled 
-            ? "bg-white shadow-md py-6" 
-            : "bg-transparent py-6"
+        variant === "black"
+          ? "bg-black shadow-md py-6"
+          : isScrolled
+          ? "bg-white shadow-md py-6"
+          : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
@@ -49,8 +49,8 @@ const Header = ({ variant = "default" }: HeaderProps) => {
               variant === "black"
                 ? "text-white hover:text-gray-200"
                 : isScrolled
-                  ? "text-black hover:text-gray-800"
-                  : "text-white hover:text-gray-200"
+                ? "text-black hover:text-gray-800"
+                : "text-white hover:text-gray-200"
             )}
           >
             TuCarretillero

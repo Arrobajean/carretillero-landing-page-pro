@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 const Cookies = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      <Header />
+      <Header variant="black" />
       <main className="flex-grow pt-24 pb-16">
         <div className="container mx-auto px-4 md:px-8">
           <Breadcrumb className="mb-8">
