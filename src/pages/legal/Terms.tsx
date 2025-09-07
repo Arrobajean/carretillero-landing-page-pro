@@ -42,8 +42,8 @@ const Terms = () => {
               </h1>
             </div>
 
-            <div className="prose prose-gray max-w-none">
-              <p className="text-gray-600 mb-6">
+            <div className="prose prose-gray max-w-none space-y-8">
+              <p className="text-gray-600 text-sm">
                 Última actualización:{" "}
                 {new Date().toLocaleDateString("es-ES", {
                   year: "numeric",
@@ -53,7 +53,7 @@ const Terms = () => {
               </p>
 
               {/* Nota del proyecto */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-blue-800 text-sm leading-relaxed">
                   <strong>Nota importante:</strong> Esta página web es un
                   proyecto de demostración desarrollado con fines educativos y
@@ -65,95 +65,105 @@ const Terms = () => {
                 </p>
               </div>
 
-              <section className="mb-8">
+              <section>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   1. Introducción
                 </h2>
-                <p className="text-gray-600 mb-4">
-                  Este sitio web es un proyecto de demostración creado con fines
-                  educativos y de portafolio. No representa una empresa real en
-                  funcionamiento, sino que ha sido desarrollado para mostrar
-                  habilidades técnicas en desarrollo web moderno.
-                </p>
-                <p className="text-gray-600">
-                  Al explorar este sitio web, reconoces que es un proyecto de
-                  demostración y que no se ofrecen servicios reales. Este
-                  proyecto ha sido creado siguiendo las mejores prácticas de
-                  desarrollo web y experiencia de usuario.
-                </p>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Este sitio web es un proyecto de demostración creado con
+                    fines educativos y de portafolio. No representa una empresa
+                    real en funcionamiento, sino que ha sido desarrollado para
+                    mostrar habilidades técnicas en desarrollo web moderno.
+                  </p>
+                  <p className="text-gray-600">
+                    Al explorar este sitio web, reconoces que es un proyecto de
+                    demostración y que no se ofrecen servicios reales. Este
+                    proyecto ha sido creado siguiendo las mejores prácticas de
+                    desarrollo web y experiencia de usuario.
+                  </p>
+                </div>
               </section>
 
-              <section className="mb-8">
+              <section>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   2. Uso del Sitio Web
                 </h2>
-                <p className="text-gray-600 mb-4">
-                  Nuestro sitio web está destinado únicamente a personas que
-                  tengan al menos 18 años de edad.
-                </p>
-                <p className="text-gray-600 mb-4">
-                  Al utilizar nuestro sitio web, usted garantiza y declara que:
-                </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                  <li>Tiene al menos 18 años de edad.</li>
-                  <li>
-                    Proporcionará información verdadera, precisa, actual y
-                    completa cuando se le solicite.
-                  </li>
-                  <li>
-                    Mantendrá y actualizará sin demora la información de
-                    registro para mantenerla verdadera, precisa, actual y
-                    completa.
-                  </li>
-                </ul>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Nuestro sitio web está destinado únicamente a personas que
+                    tengan al menos 18 años de edad.
+                  </p>
+                  <p className="text-gray-600">
+                    Al utilizar nuestro sitio web, usted garantiza y declara
+                    que:
+                  </p>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                    <li>Tiene al menos 18 años de edad.</li>
+                    <li>
+                      Proporcionará información verdadera, precisa, actual y
+                      completa cuando se le solicite.
+                    </li>
+                    <li>
+                      Mantendrá y actualizará sin demora la información de
+                      registro para mantenerla verdadera, precisa, actual y
+                      completa.
+                    </li>
+                  </ul>
+                </div>
               </section>
 
-              <section className="mb-8">
+              <section>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   3. Propósito del Proyecto
                 </h2>
-                <p className="text-gray-600 mb-4">
-                  Este proyecto de demostración ha sido creado para los
-                  siguientes propósitos:
-                </p>
-                <ul className="list-disc pl-6 space-y-2 text-gray-600">
-                  <li>
-                    Mostrar habilidades técnicas en desarrollo frontend moderno
-                    (React, TypeScript, Tailwind CSS).
-                  </li>
-                  <li>
-                    Demostrar competencias en diseño UX/UI y experiencia de
-                    usuario.
-                  </li>
-                  <li>
-                    Exhibir implementación de sitios web responsivos y
-                    accesibles.
-                  </li>
-                  <li>
-                    Presentar un portafolio de trabajo profesional en desarrollo
-                    web.
-                  </li>
-                </ul>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Este proyecto de demostración ha sido creado para los
+                    siguientes propósitos:
+                  </p>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                    <li>
+                      Mostrar habilidades técnicas en desarrollo frontend
+                      moderno (React, TypeScript, Tailwind CSS).
+                    </li>
+                    <li>
+                      Demostrar competencias en diseño UX/UI y experiencia de
+                      usuario.
+                    </li>
+                    <li>
+                      Exhibir implementación de sitios web responsivos y
+                      accesibles.
+                    </li>
+                    <li>
+                      Presentar un portafolio de trabajo profesional en
+                      desarrollo web.
+                    </li>
+                  </ul>
+                </div>
               </section>
 
-              <section className="mb-8">
+              <section>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   4. Propiedad Intelectual
                 </h2>
-                <p className="text-gray-600 mb-4">
-                  Este proyecto de demostración ha sido desarrollado como un
-                  trabajo original. El código fuente, diseño y contenido han
-                  sido creados específicamente para este proyecto de portafolio.
-                </p>
-                <p className="text-gray-600">
-                  Las imágenes utilizadas son de uso libre o han sido obtenidas
-                  de fuentes que permiten su uso en proyectos de demostración.
-                  El diseño y la implementación técnica son obra original del
-                  desarrollador.
-                </p>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Este proyecto de demostración ha sido desarrollado como un
+                    trabajo original. El código fuente, diseño y contenido han
+                    sido creados específicamente para este proyecto de
+                    portafolio.
+                  </p>
+                  <p className="text-gray-600">
+                    Las imágenes utilizadas son de uso libre o han sido
+                    obtenidas de fuentes que permiten su uso en proyectos de
+                    demostración. El diseño y la implementación técnica son obra
+                    original del desarrollador.
+                  </p>
+                </div>
               </section>
 
-              <section className="mb-8">
+              <section>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
                   5. Limitación de Responsabilidad
                 </h2>
@@ -169,32 +179,34 @@ const Terms = () => {
 
               <section>
                 <h2 className="text-xl font-semibold text-gray-800 mb-4">
-                  5. Contacto y Colaboración
+                  6. Contacto y Colaboración
                 </h2>
-                <p className="text-gray-600 mb-4">
-                  Este proyecto ha sido desarrollado como una demostración de
-                  habilidades técnicas. Si estás interesado en colaborar, tienes
-                  preguntas sobre la implementación técnica, o buscas servicios
-                  de desarrollo web, no dudes en contactar.
-                </p>
-                <p className="text-gray-600 mb-4">
-                  Para consultas técnicas sobre este proyecto o colaboraciones
-                  profesionales, contacta con{" "}
-                  <a
-                    href="https://404studios.digital"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    404 Studios Digital
-                  </a>
-                  , liderada por Jean Paul Castañeda Huerta.
-                </p>
-                <p className="text-gray-600 text-sm">
-                  Este proyecto demuestra competencias en React, TypeScript,
-                  Tailwind CSS, diseño responsivo, optimización de rendimiento y
-                  mejores prácticas de desarrollo web moderno.
-                </p>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Este proyecto ha sido desarrollado como una demostración de
+                    habilidades técnicas. Si estás interesado en colaborar,
+                    tienes preguntas sobre la implementación técnica, o buscas
+                    servicios de desarrollo web, no dudes en contactar.
+                  </p>
+                  <p className="text-gray-600">
+                    Para consultas técnicas sobre este proyecto o colaboraciones
+                    profesionales, contacta con{" "}
+                    <a
+                      href="https://404studios.digital"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      404 Studios Digital
+                    </a>
+                    , liderada por Jean Paul Castañeda Huerta.
+                  </p>
+                  <p className="text-gray-600 text-sm">
+                    Este proyecto demuestra competencias en React, TypeScript,
+                    Tailwind CSS, diseño responsivo, optimización de rendimiento
+                    y mejores prácticas de desarrollo web moderno.
+                  </p>
+                </div>
               </section>
             </div>
           </div>

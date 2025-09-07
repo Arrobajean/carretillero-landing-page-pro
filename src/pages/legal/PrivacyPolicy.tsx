@@ -45,8 +45,8 @@ const PrivacyPolicy = () => {
             </div>
 
             {/* Legal content */}
-            <div className="prose prose-gray dark:prose-invert max-w-none text-base leading-relaxed">
-              <p className="text-muted-foreground mb-6">
+            <div className="prose prose-gray dark:prose-invert max-w-none text-base leading-relaxed space-y-8">
+              <p className="text-muted-foreground text-sm">
                 Última actualización:{" "}
                 {new Date().toLocaleDateString("es-ES", {
                   year: "numeric",
@@ -56,7 +56,7 @@ const PrivacyPolicy = () => {
               </p>
 
               {/* Nota del proyecto */}
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <p className="text-blue-800 text-sm leading-relaxed">
                   <strong>Nota importante:</strong> Esta página web es un
                   proyecto de demostración desarrollado con fines educativos y
@@ -68,59 +68,71 @@ const PrivacyPolicy = () => {
                 </p>
               </div>
 
-              <section className="mb-8">
-                <h2>1. Información que Recopilamos</h2>
-                <p>
-                  Esta página web es un proyecto de demostración y no recopila
-                  datos personales reales. Sin embargo, para fines educativos,
-                  describimos las prácticas estándar de privacidad que
-                  implementaría una empresa real de formación profesional.
-                </p>
-                <p>En un entorno real, podríamos recopilar:</p>
-                <ul>
-                  <li>
-                    Información de contacto proporcionada voluntariamente a
-                    través de formularios.
-                  </li>
-                  <li>
-                    Datos de navegación anónimos para mejorar la experiencia del
-                    usuario.
-                  </li>
-                  <li>
-                    Información técnica básica del dispositivo y navegador.
-                  </li>
-                  <li>
-                    Cookies necesarias para el funcionamiento del sitio web.
-                  </li>
-                </ul>
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                  1. Información que Recopilamos
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Esta página web es un proyecto de demostración y no recopila
+                    datos personales reales. Sin embargo, para fines educativos,
+                    describimos las prácticas estándar de privacidad que
+                    implementaría una empresa real de formación profesional.
+                  </p>
+                  <p className="text-gray-600">
+                    En un entorno real, podríamos recopilar:
+                  </p>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                    <li>
+                      Información de contacto proporcionada voluntariamente a
+                      través de formularios.
+                    </li>
+                    <li>
+                      Datos de navegación anónimos para mejorar la experiencia
+                      del usuario.
+                    </li>
+                    <li>
+                      Información técnica básica del dispositivo y navegador.
+                    </li>
+                    <li>
+                      Cookies necesarias para el funcionamiento del sitio web.
+                    </li>
+                  </ul>
+                </div>
               </section>
 
-              <section className="mb-8">
-                <h2>2. Cómo Utilizamos su Información</h2>
-                <p>
-                  Utilizamos la información que tenemos sobre usted de las
-                  siguientes maneras:
-                </p>
-                <ul>
-                  <li>
-                    Para proporcionarle información sobre nuestros cursos y
-                    servicios.
-                  </li>
-                  <li>
-                    Para cumplir con nuestras obligaciones derivadas de
-                    cualquier contrato entre usted y nosotros.
-                  </li>
-                  <li>
-                    Para permitirle participar en las funciones interactivas de
-                    nuestro servicio, cuando elija hacerlo.
-                  </li>
-                  <li>Para notificarle sobre cambios en nuestro servicio.</li>
-                </ul>
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                  2. Cómo Utilizamos su Información
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Utilizamos la información que tenemos sobre usted de las
+                    siguientes maneras:
+                  </p>
+                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                    <li>
+                      Para proporcionarle información sobre nuestros cursos y
+                      servicios.
+                    </li>
+                    <li>
+                      Para cumplir con nuestras obligaciones derivadas de
+                      cualquier contrato entre usted y nosotros.
+                    </li>
+                    <li>
+                      Para permitirle participar en las funciones interactivas
+                      de nuestro servicio, cuando elija hacerlo.
+                    </li>
+                    <li>Para notificarle sobre cambios en nuestro servicio.</li>
+                  </ul>
+                </div>
               </section>
 
-              <section className="mb-8">
-                <h2>3. Divulgación de su Información</h2>
-                <p>
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                  3. Divulgación de su Información
+                </h2>
+                <p className="text-gray-600">
                   No vendemos, distribuimos ni arrendamos su información
                   personal a terceros a menos que tengamos su permiso o estemos
                   obligados por ley a hacerlo. Podemos utilizar su información
@@ -129,28 +141,35 @@ const PrivacyPolicy = () => {
                 </p>
               </section>
 
-              <section className="mb-8">
-                <h2>4. Sus Derechos</h2>
-                <p>
-                  Tiene derecho a solicitar una copia de la información personal
-                  que tenemos sobre usted. Puede solicitarnos que corrijamos o
-                  eliminemos cualquier información que considere incorrecta.
-                </p>
-                <p>
-                  Si desea ejercer alguno de estos derechos, contáctenos en{" "}
-                  <a
-                    href="mailto:privacidad@tucarretillero.com"
-                    className="text-primary hover:underline"
-                  >
-                    privacidad@tucarretillero.com
-                  </a>
-                  .
-                </p>
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                  4. Sus Derechos
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Tiene derecho a solicitar una copia de la información
+                    personal que tenemos sobre usted. Puede solicitarnos que
+                    corrijamos o eliminemos cualquier información que considere
+                    incorrecta.
+                  </p>
+                  <p className="text-gray-600">
+                    Si desea ejercer alguno de estos derechos, contáctenos en{" "}
+                    <a
+                      href="mailto:privacidad@tucarretillero.com"
+                      className="text-primary hover:underline"
+                    >
+                      privacidad@tucarretillero.com
+                    </a>
+                    .
+                  </p>
+                </div>
               </section>
 
-              <section className="mb-8">
-                <h2>5. Cambios en nuestra Política de Privacidad</h2>
-                <p>
+              <section>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                  5. Cambios en nuestra Política de Privacidad
+                </h2>
+                <p className="text-gray-600">
                   Cualquier cambio que hagamos en nuestra política de privacidad
                   en el futuro se publicará en esta página. Consulte con
                   frecuencia para ver las actualizaciones o cambios en nuestra
@@ -159,28 +178,32 @@ const PrivacyPolicy = () => {
               </section>
 
               <section>
-                <h2>6. Contacto</h2>
-                <p>
-                  Como este es un proyecto de demostración, no hay datos reales
-                  que procesar. Sin embargo, si tienes preguntas sobre el
-                  desarrollo de este proyecto o estás interesado en colaborar,
-                  puedes contactar al desarrollador.
-                </p>
-                <p className="mt-4 text-sm text-muted-foreground">
-                  Este proyecto ha sido desarrollado siguiendo las mejores
-                  prácticas de desarrollo web moderno. Para consultas técnicas
-                  sobre la implementación o colaboraciones profesionales,
-                  contacta con{" "}
-                  <a
-                    href="https://404studios.digital"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    404 Studios Digital
-                  </a>
-                  , liderada por Jean Paul Castañeda Huerta.
-                </p>
+                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                  6. Contacto
+                </h2>
+                <div className="space-y-4">
+                  <p className="text-gray-600">
+                    Como este es un proyecto de demostración, no hay datos
+                    reales que procesar. Sin embargo, si tienes preguntas sobre
+                    el desarrollo de este proyecto o estás interesado en
+                    colaborar, puedes contactar al desarrollador.
+                  </p>
+                  <p className="text-sm text-muted-foreground">
+                    Este proyecto ha sido desarrollado siguiendo las mejores
+                    prácticas de desarrollo web moderno. Para consultas técnicas
+                    sobre la implementación o colaboraciones profesionales,
+                    contacta con{" "}
+                    <a
+                      href="https://404studios.digital"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline"
+                    >
+                      404 Studios Digital
+                    </a>
+                    , liderada por Jean Paul Castañeda Huerta.
+                  </p>
+                </div>
               </section>
             </div>
           </div>
