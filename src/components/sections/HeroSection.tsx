@@ -5,7 +5,7 @@ import { useHeroImages } from "@/hooks/useHeroImages";
 import { scrollToSection } from "@/utils/scrollToSection";
 
 const HeroSection = () => {
-  const { currentImageIndex, heroImages } = useHeroImages();
+  const { currentImageIndex, heroImages, imagesLoaded } = useHeroImages();
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden">
@@ -14,15 +14,21 @@ const HeroSection = () => {
         {heroImages.map((image, index) => (
           <div
             key={index}
-            className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              imagesLoaded ? "opacity-100" : "opacity-0"
+            }`}
             style={{
-              opacity: index === currentImageIndex ? 1 : 0,
+              opacity: index === currentImageIndex && imagesLoaded ? 1 : 0,
               backgroundImage: `url(${image})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
             }}
           />
         ))}
+        {/* Loading placeholder */}
+        {!imagesLoaded && (
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900" />
+        )}
         <div className="absolute inset-0 bg-black opacity-60" />
       </div>
 

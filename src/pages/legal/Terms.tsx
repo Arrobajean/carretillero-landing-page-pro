@@ -42,7 +42,7 @@ const Terms = () => {
               </h1>
             </div>
 
-            <div className="prose prose-gray max-w-none space-y-8">
+            <div className="prose prose-gray max-w-none space-y-6">
               <p className="text-gray-600 text-sm">
                 Última actualización:{" "}
                 {new Date().toLocaleDateString("es-ES", {
@@ -66,10 +66,10 @@ const Terms = () => {
               </div>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   1. Introducción
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Este sitio web es un proyecto de demostración creado con
                     fines educativos y de portafolio. No representa una empresa
@@ -86,10 +86,10 @@ const Terms = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   2. Uso del Sitio Web
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Nuestro sitio web está destinado únicamente a personas que
                     tengan al menos 18 años de edad.
@@ -98,7 +98,7 @@ const Terms = () => {
                     Al utilizar nuestro sitio web, usted garantiza y declara
                     que:
                   </p>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <ul className="list-disc pl-6 space-y-1 text-gray-600">
                     <li>Tiene al menos 18 años de edad.</li>
                     <li>
                       Proporcionará información verdadera, precisa, actual y
@@ -114,15 +114,15 @@ const Terms = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   3. Propósito del Proyecto
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Este proyecto de demostración ha sido creado para los
                     siguientes propósitos:
                   </p>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <ul className="list-disc pl-6 space-y-1 text-gray-600">
                     <li>
                       Mostrar habilidades técnicas en desarrollo frontend
                       moderno (React, TypeScript, Tailwind CSS).
@@ -144,10 +144,10 @@ const Terms = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   4. Propiedad Intelectual
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Este proyecto de demostración ha sido desarrollado como un
                     trabajo original. El código fuente, diseño y contenido han
@@ -164,7 +164,7 @@ const Terms = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   5. Limitación de Responsabilidad
                 </h2>
                 <p className="text-gray-600">
@@ -178,10 +178,10 @@ const Terms = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   6. Contacto y Colaboración
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Este proyecto ha sido desarrollado como una demostración de
                     habilidades técnicas. Si estás interesado en colaborar,

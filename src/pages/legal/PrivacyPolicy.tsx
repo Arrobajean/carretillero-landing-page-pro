@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
             </div>
 
             {/* Legal content */}
-            <div className="prose prose-gray dark:prose-invert max-w-none text-base leading-relaxed space-y-8">
+            <div className="prose prose-gray dark:prose-invert max-w-none text-base leading-relaxed space-y-6">
               <p className="text-muted-foreground text-sm">
                 Última actualización:{" "}
                 {new Date().toLocaleDateString("es-ES", {
@@ -69,20 +69,20 @@ const PrivacyPolicy = () => {
               </div>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   1. Información que Recopilamos
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Esta página web es un proyecto de demostración y no recopila
-                    datos personales reales. Sin embargo, para fines educativos,
-                    describimos las prácticas estándar de privacidad que
-                    implementaría una empresa real de formación profesional.
+                    datos personales reales. Para fines educativos, describimos
+                    las prácticas estándar de privacidad que implementaría una
+                    empresa real de formación profesional.
                   </p>
                   <p className="text-gray-600">
                     En un entorno real, podríamos recopilar:
                   </p>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <ul className="list-disc pl-6 space-y-1 text-gray-600">
                     <li>
                       Información de contacto proporcionada voluntariamente a
                       través de formularios.
@@ -102,15 +102,15 @@ const PrivacyPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   2. Cómo Utilizamos su Información
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Utilizamos la información que tenemos sobre usted de las
                     siguientes maneras:
                   </p>
-                  <ul className="list-disc pl-6 space-y-2 text-gray-600">
+                  <ul className="list-disc pl-6 space-y-1 text-gray-600">
                     <li>
                       Para proporcionarle información sobre nuestros cursos y
                       servicios.
@@ -129,7 +129,7 @@ const PrivacyPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   3. Divulgación de su Información
                 </h2>
                 <p className="text-gray-600">
@@ -142,10 +142,10 @@ const PrivacyPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   4. Sus Derechos
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Tiene derecho a solicitar una copia de la información
                     personal que tenemos sobre usted. Puede solicitarnos que
@@ -166,7 +166,7 @@ const PrivacyPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   5. Cambios en nuestra Política de Privacidad
                 </h2>
                 <p className="text-gray-600">
@@ -178,10 +178,10 @@ const PrivacyPolicy = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   6. Contacto
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Como este es un proyecto de demostración, no hay datos
                     reales que procesar. Sin embargo, si tienes preguntas sobre

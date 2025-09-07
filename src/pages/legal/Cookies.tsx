@@ -42,7 +42,7 @@ const Cookies = () => {
               </h1>
             </div>
 
-            <div className="prose prose-gray max-w-none space-y-8">
+            <div className="prose prose-gray max-w-none space-y-6">
               <p className="text-gray-600 text-sm">
                 Última actualización:{" "}
                 {new Date().toLocaleDateString("es-ES", {
@@ -66,10 +66,10 @@ const Cookies = () => {
               </div>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   1. ¿Qué son las Cookies?
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Las cookies son pequeños archivos de texto que los sitios
                     web colocan en su dispositivo cuando los visita. En este
@@ -86,12 +86,12 @@ const Cookies = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   2. Implementación de Cookies en este Proyecto
                 </h2>
-                <div className="space-y-6">
+                <div className="space-y-4">
                   <div>
-                    <h3 className="font-semibold text-gray-700 mb-3">
+                    <h3 className="font-semibold text-gray-700 mb-2">
                       Cookies Técnicas
                     </h3>
                     <p className="text-gray-600">
@@ -101,7 +101,7 @@ const Cookies = () => {
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-700 mb-3">
+                    <h3 className="font-semibold text-gray-700 mb-2">
                       Gestión de Preferencias
                     </h3>
                     <p className="text-gray-600">
@@ -112,7 +112,7 @@ const Cookies = () => {
                     </p>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-700 mb-3">
+                    <h3 className="font-semibold text-gray-700 mb-2">
                       Sin Recopilación de Datos
                     </h3>
                     <p className="text-gray-600">
@@ -125,10 +125,10 @@ const Cookies = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   3. Cómo Controlar las Cookies
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Usted puede controlar y administrar las cookies de varias
                     maneras. Tenga en cuenta que eliminar o bloquear cookies
@@ -155,7 +155,7 @@ const Cookies = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   4. Cookies de Terceros
                 </h2>
                 <p className="text-gray-600">
@@ -166,10 +166,10 @@ const Cookies = () => {
               </section>
 
               <section>
-                <h2 className="text-xl font-semibold text-gray-800 mb-4">
+                <h2 className="text-xl font-semibold text-gray-800 mb-3">
                   5. Contacto y Colaboración
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-3">
                   <p className="text-gray-600">
                     Este proyecto demuestra la implementación correcta de
                     políticas de cookies y gestión de privacidad. Si tienes
