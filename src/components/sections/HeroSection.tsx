@@ -36,7 +36,7 @@ const HeroSection = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
           >
             Curso de carretillero presencial por{" "}
-            <span className="text-green-400">50€ todo incluido</span>
+            <span className="text-accent">50€ todo incluido</span>
           </motion.h1>
 
           <motion.p
