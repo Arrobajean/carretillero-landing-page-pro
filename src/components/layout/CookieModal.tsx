@@ -1,15 +1,20 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Cookie, X, Check, Settings } from "lucide-react";
-import { useCookieConsent } from "@/hooks/useCookieConsent";
-import { Button } from "@/components/ui/button";
-import { Switch } from "@/components/ui/switch";
 import {
+  Button,
   Dialog,
   DialogContent,
+  DialogContentText,
   DialogTitle,
-  DialogDescription,
-} from "@/components/ui/dialog";
+  Stack,
+  Switch,
+  Typography,
+} from "@mui/material";
+import Cookie from "@mui/icons-material/Cookie";
+import Check from "@mui/icons-material/Check";
+import Close from "@mui/icons-material/Close";
+import Settings from "@mui/icons-material/Settings";
+import { useCookieConsent } from "@/hooks/useCookieConsent";
 import { Link } from "react-router-dom";
 
 const CookieModal = () => {
@@ -40,18 +45,18 @@ const CookieModal = () => {
   if (!showBanner) return null;
 
   return (
-    <Dialog open={showBanner} onOpenChange={() => {}}>
-      <DialogContent className="w-full max-w-lg sm:max-w-xl max-h-[90vh] overflow-y-auto">
-        <DialogTitle className="flex items-center gap-2">
-          <Cookie className="h-5 w-5 text-accent" />
-          <span>Configuración de cookies</span>
-        </DialogTitle>
+    // Non-dismissable: the user must choose an option, so closing is a no-op.
+    <Dialog open={showBanner} onClose={() => {}} fullWidth maxWidth="sm">
+      <DialogTitle sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
+        <Cookie sx={{ color: "primary.main" }} />
+        <span>Configuración de cookies</span>
+      </DialogTitle>
 
-        <DialogDescription className="text-gray-600 text-sm">
-          Este sitio web utiliza cookies para mejorar tu experiencia de
-          navegación. Puedes personalizar tus preferencias o aceptar todas las
-          cookies.
-        </DialogDescription>
+      <DialogContent>
+        <DialogContentText sx={{ fontSize: "0.875rem" }}>
+          Usamos cookies para medir las visitas y mejorar la web. Puedes aceptarlas
+          todas, rechazarlas o elegir cuáles activas.
+        </DialogContentText>
 
         <AnimatePresence mode="wait">
           {!showCustomize ? (
@@ -60,48 +65,53 @@ const CookieModal = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="space-y-4"
             >
-              <div className="flex flex-col sm:flex-row gap-3 justify-center mt-4">
+              <Stack
+                direction={{ xs: "column", sm: "row" }}
+                spacing={1.5}
+                justifyContent="center"
+                sx={{ mt: 3 }}
+              >
                 <Button
                   onClick={handleAccept}
-                  className="bg-accent hover:bg-accent/90 w-full sm:w-auto"
+                  variant="contained"
+                  color="secondary"
+                  startIcon={<Check />}
+                  sx={{ width: { xs: "100%", sm: "auto" } }}
                 >
-                  <Check size={16} className="mr-2" />
                   Aceptar todas
                 </Button>
                 <Button
                   onClick={() => setShowCustomize(true)}
-                  variant="outline"
-                  className="w-full sm:w-auto"
+                  variant="outlined"
+                  startIcon={<Settings />}
+                  sx={{ width: { xs: "100%", sm: "auto" } }}
                 >
-                  <Settings size={16} className="mr-2" />
                   Personalizar
                 </Button>
                 <Button
                   onClick={handleReject}
-                  variant="outline"
-                  className="w-full sm:w-auto border-gray-300"
+                  variant="outlined"
+                  color="inherit"
+                  startIcon={<Close />}
+                  sx={{ width: { xs: "100%", sm: "auto" }, borderColor: "divider" }}
                 >
-                  <X size={16} className="mr-2" />
                   Rechazar
                 </Button>
-              </div>
+              </Stack>
 
-              <div className="text-xs text-center text-gray-500 leading-relaxed max-w-prose mx-auto">
-                <p>
-                  Al hacer clic en "Aceptar todas", consientes el uso de cookies
-                  para analizar el tráfico y personalizar el contenido. Consulta
-                  nuestra{" "}
-                  <Link
-                    to="/politica-cookies"
-                    className="text-accent hover:underline"
-                  >
-                    Política de Cookies
-                  </Link>{" "}
-                  para más información.
-                </p>
-              </div>
+              <Typography
+                sx={{ mt: 3, fontSize: "0.75rem", textAlign: "center", color: "text.secondary", lineHeight: 1.6, maxWidth: "65ch", mx: "auto" }}
+              >
+                Si aceptas todas, autorizas las cookies para medir el tráfico y
+                personalizar el contenido. Más detalles en nuestra{" "}
+                <Link
+                  to="/politica-cookies"
+                  style={{ color: "#2b2b2b", fontWeight: 500, textDecoration: "underline" }}
+                >
+                  Política de Cookies
+                </Link>.
+              </Typography>
             </motion.div>
           ) : (
             <motion.div
@@ -109,21 +119,20 @@ const CookieModal = () => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="space-y-6"
             >
-              <div className="space-y-4">
+              <Stack spacing={2.5} sx={{ mt: 3 }}>
                 {[
                   {
                     id: "necessary",
                     label: "Cookies necesarias",
-                    description: "Esenciales para el funcionamiento del sitio",
+                    description: "Necesarias para que la web funcione",
                     value: true,
                     disabled: true,
                   },
                   {
                     id: "analytics",
                     label: "Cookies analíticas",
-                    description: "Nos ayudan a mejorar nuestra web",
+                    description: "Miden las visitas para saber qué páginas interesan",
                     value: preferences.analytics,
                     onChange: (checked: boolean) =>
                       setPreferences((prev) => ({
@@ -143,40 +152,40 @@ const CookieModal = () => {
                       })),
                   },
                 ].map((cookie) => (
-                  <div
+                  <Stack
                     key={cookie.id}
-                    className="flex items-center justify-between"
+                    direction="row"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    spacing={2}
                   >
                     <div>
-                      <p className="font-medium">{cookie.label}</p>
-                      <p className="text-sm text-gray-500">
+                      <Typography sx={{ fontWeight: 500 }}>{cookie.label}</Typography>
+                      <Typography variant="body2" color="text.secondary">
                         {cookie.description}
-                      </p>
+                      </Typography>
                     </div>
                     <Switch
                       checked={cookie.value}
                       disabled={cookie.disabled}
-                      onCheckedChange={cookie.onChange}
+                      onChange={(_, checked) => cookie.onChange?.(checked)}
                     />
-                  </div>
+                  </Stack>
                 ))}
-              </div>
+              </Stack>
 
-              <div className="flex gap-3 justify-end flex-wrap">
-                <Button
-                  variant="outline"
-                  onClick={() => setShowCustomize(false)}
-                >
+              <Stack direction="row" spacing={1.5} justifyContent="flex-end" flexWrap="wrap" useFlexGap sx={{ mt: 4 }}>
+                <Button variant="outlined" onClick={() => setShowCustomize(false)}>
                   Volver
                 </Button>
                 <Button
-                  variant="default"
+                  variant="contained"
+                  color="secondary"
                   onClick={handleSavePreferences}
-                  className="bg-accent hover:bg-accent/90"
                 >
                   Guardar preferencias
                 </Button>
-              </div>
+              </Stack>
             </motion.div>
           )}
         </AnimatePresence>

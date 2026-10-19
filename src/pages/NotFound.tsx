@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Button, Typography } from "@mui/material";
 
 const NotFound = () => {
   const location = useLocation();
@@ -13,12 +14,16 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+      <div className="text-center px-4">
+        <Typography variant="h1" component="h1" sx={{ mb: 2 }}>
+          404
+        </Typography>
+        <Typography color="text.secondary" sx={{ fontSize: "1.25rem", mb: 4 }}>
+          Esta página no existe. El enlace puede estar roto o la página se ha movido.
+        </Typography>
+        <Button href="/" variant="contained" size="large">
+          Volver al inicio
+        </Button>
       </div>
     </div>
   );

@@ -27,14 +27,14 @@ const courses: Course[] = [
     slug: "curso-basico-carretillero",
     title: "Curso Básico de Carretillero",
     shortDescription:
-      "Formación completa de carretillero en un solo día. Incluye práctica con equipos reales y certificación oficial.",
+      "Carretillero en un solo día: teoría, prácticas con máquinas reales y certificado.",
     longDescription:
-      "Nuestro curso básico de carretillero ofrece una formación completa y oficial para el manejo seguro y eficiente de carretillas elevadoras. En tan solo un día, obtendrás los conocimientos teóricos y prácticos necesarios para operar estos equipos con confianza y profesionalismo.\n\nEl curso incluye módulos sobre normativa de seguridad, mantenimiento básico de equipos, técnicas de conducción y manipulación de cargas, además de prácticas con equipos reales en nuestras instalaciones especializadas.\n\nAl finalizar, recibirás un diploma certificado válido en toda España que acreditará tus competencias como carretillero profesional, aumentando significativamente tus oportunidades laborales en sectores logísticos, industriales y de almacenaje.",
+      "Este curso te prepara para manejar una carretilla elevadora con seguridad. Dura 8 horas: una parte de teoría sobre normativa y tipos de carretilla, y después prácticas con equipos reales en nuestras instalaciones.\n\nVerás seis bloques: normativa de seguridad, tipos de carretillas elevadoras, mantenimiento básico, técnicas de conducción, manipulación de cargas y prácticas con equipos reales. No necesitas experiencia previa.\n\nAl terminar recibes un certificado con validez en toda España. Acredita tus competencias para trabajar con carretillas en almacenes, industrias y centros logísticos.",
     price: "50€",
     mode: "Presencial",
     locations: "Todas las sedes",
     image:
-      "https://images.unsplash.com/photo-1566459069038-41bdf98ae5e0?q=80&w=600&auto=format",
+      "/images/cursos/mujer-conduciendo-la-maquina-de-carga-de-almacen.jpg",
     duration: "1 día (8 horas)",
     syllabus: [
       "Módulo 1: Normativa de seguridad",
@@ -48,12 +48,12 @@ const courses: Course[] = [
       {
         question: "¿Necesito experiencia previa para realizar este curso?",
         answer:
-          "No, este curso está diseñado para principiantes y no requiere experiencia previa en el manejo de carretillas.",
+          "No. El curso básico está pensado para personas que nunca han manejado una carretilla.",
       },
       {
         question: "¿El certificado tiene validez nacional?",
         answer:
-          "Sí, el certificado que obtendrás tiene validez en toda España y cumple con la normativa vigente de prevención de riesgos laborales.",
+          "Sí. El certificado vale en toda España y cumple la normativa vigente de prevención de riesgos laborales.",
       },
     ],
     type: "course",
@@ -64,14 +64,14 @@ const courses: Course[] = [
     slug: "carretillero-puente-grua",
     title: "Carretillero + Puente Grúa",
     shortDescription:
-      "Formación dual para el manejo profesional de carretillas y puentes grúa.",
+      "Dos cursos en dos días: carretillero y puente grúa, con certificado para cada uno.",
     longDescription:
-      "Nuestro curso combinado de Carretillero y Puente Grúa ofrece una formación integral para profesionales del sector logístico e industrial. Esta formación dual te permitirá obtener dos certificaciones oficiales en un solo programa, maximizando tu empleabilidad y competencias técnicas.\n\nEl módulo de carretillero incluye formación completa para el manejo seguro y eficiente de carretillas elevadoras, mientras que el módulo de puente grúa te capacitará para operar estos sistemas de elevación con precisión y seguridad.\n\nAmbos módulos combinan teoría y práctica con equipos reales, asegurando que desarrolles habilidades aplicables inmediatamente en entornos laborales. Al finalizar, recibirás certificaciones oficiales para ambas especialidades.",
+      "Este pack reúne dos formaciones en dos días. El primer día es de carretillero elevador. El segundo es de puente grúa: la grúa que se desplaza sobre raíles en la parte alta de la nave y levanta cargas pesadas.\n\nCada día combina teoría y práctica con equipos reales. Al terminar recibes un certificado por cada especialidad, así que no necesitas hacer dos cursos por separado.",
     price: "90€",
     mode: "Presencial",
     locations: "Coslada, Alcorcón, Ciempozuelos",
     image:
-      "https://images.unsplash.com/photo-1566275412455-45804f3ca0bc?q=80&w=600&auto=format",
+      "/images/cursos/carretilla-elevadora.avif",
     duration: "2 días (16 horas)",
     syllabus: [
       "Módulo Carretillero (1er día)",
@@ -87,14 +87,13 @@ const courses: Course[] = [
     slug: "carretillero-manipulador-alimentos",
     title: "Carretillero + Manipulador de Alimentos",
     shortDescription:
-      "Certificación combinada para manejo de carretillas y manipulación de alimentos.",
+      "Carretillero y manipulador de alimentos en un solo curso, para trabajar en logística alimentaria.",
     longDescription:
-      "Este curso combinado está especialmente diseñado para profesionales que buscan trabajar en el sector de la logística alimentaria. Obtendrás dos certificaciones esenciales: carretillero profesional y manipulador de alimentos, ampliando significativamente tus oportunidades laborales.\n\nEl módulo de carretillero te proporcionará todas las competencias necesarias para el manejo seguro y eficiente de carretillas elevadoras, mientras que el módulo de manipulador de alimentos te formará en los protocolos de higiene, seguridad alimentaria y buenas prácticas exigidas por la normativa vigente.\n\nAl finalizar, contarás con ambas certificaciones oficiales, convirtiéndote en un candidato ideal para almacenes, centros logísticos y empresas distribuidoras del sector alimentario.",
+      "Este curso es para quien quiere trabajar en logística alimentaria. Dura 12 horas y da dos certificados: carretillero y manipulador de alimentos.\n\nEn el módulo de carretillero aprendes a manejar la máquina con seguridad. En el de manipulación de alimentos, los protocolos de higiene y las buenas prácticas que exige la normativa.\n\nEl curso es presencial y online. Consulta por WhatsApp qué parte se hace en cada formato. Al terminar tienes los dos certificados, útiles en almacenes, centros logísticos y empresas de distribución de alimentos.",
     price: "70€",
     mode: "Presencial y Online",
     locations: "Todas las sedes",
-    image:
-      "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
+    image: "/images/cursos/manipulador-alimentos.jpg",
     duration: "1 día y medio (12 horas)",
     type: "course",
     rating: 4.7,
@@ -104,14 +103,14 @@ const courses: Course[] = [
     slug: "pack-top-formacion",
     title: "PACK TOP FORMACIÓN",
     shortDescription:
-      "Pack completo: Carretillero + Plataforma + Puente Grúa + Radiofrecuencia + Manipulador",
+      "Cinco formaciones en cinco días: carretillero, plataforma elevadora, puente grúa, radiofrecuencia y manipulador de alimentos.",
     longDescription:
-      "Nuestro Pack Top Formación representa la opción más completa y ventajosa para profesionales que buscan maximizar su empleabilidad en el sector logístico e industrial. Este pack formativo integral incluye cinco certificaciones oficiales fundamentales:\n\n- Carretillero: Manejo profesional de carretillas elevadoras.\n- Plataforma Elevadora: Operación segura de plataformas de trabajo en altura.\n- Puente Grúa: Control y manejo de sistemas de elevación industrial.\n- Radiofrecuencia: Gestión y control de inventario mediante sistemas RF.\n- Manipulador de Alimentos: Protocolos de higiene y seguridad alimentaria.\n\nCada módulo combina teoría y práctica intensiva con equipos reales, garantizando una formación completa y aplicable. Al finalizar, obtendrás cinco certificaciones oficiales que transformarán tu perfil profesional, abriéndote puertas en múltiples sectores y especialidades.",
+      "El Pack Top reúne cinco formaciones en cinco días, 40 horas en total. Al terminar obtienes los cinco certificados.\n\nCarretillero cubre el manejo de carretillas elevadoras. Plataforma elevadora enseña a trabajar en altura con seguridad. Puente grúa cubre el control de la elevación industrial. Radiofrecuencia enseña a gestionar el inventario con sistemas RF. Manipulador de alimentos trata la higiene y la seguridad alimentaria.\n\nCada módulo mezcla teoría y práctica con equipos reales.",
     price: "160€",
     mode: "Presencial",
     locations: "Coslada, Alcorcón",
     image:
-      "/public/images/cursos/empleados-de-trabajo-en-equipo-en-almacen.jpg",
+      "/images/cursos/empleados-de-trabajo-en-equipo-en-almacen.jpg",
     duration: "5 días (40 horas)",
     type: "pack",
     rating: 5.0,
@@ -120,14 +119,14 @@ const courses: Course[] = [
     id: 5,
     slug: "pack-mega-formacion",
     title: "PACK MEGA FORMACIÓN",
-    shortDescription: "Pack premium con todos los cursos + equipos de limpieza",
+    shortDescription:
+      "Los cinco certificados del Pack Top y, además, formación en equipos de limpieza industrial.",
     longDescription:
-      "El Pack Mega Formación representa nuestra oferta formativa más completa y exclusiva, diseñada para profesionales que buscan dominar todas las áreas de la logística industrial. Este paquete premium incluye todas las certificaciones del Pack Top Formación (Carretillero, Plataforma Elevadora, Puente Grúa, Radiofrecuencia y Manipulador de Alimentos) y añade una especialización adicional en Equipos de Limpieza Industrial.\n\nEsta formación completa y diversificada te convertirá en un profesional altamente versátil, capaz de desempeñarte con excelencia en cualquier entorno industrial o logístico. Cada módulo combina teoría especializada con prácticas intensivas utilizando equipos profesionales de última generación.\n\nAl completar el programa, obtendrás seis certificaciones oficiales que potenciarán exponencialmente tus oportunidades laborales y tu valor como profesional del sector.",
+      "El Pack Mega incluye todo el Pack Top y un módulo más: equipos de limpieza industrial. Son seis días, 48 horas, y seis certificados.\n\nEs para quien quiere un perfil polivalente en almacenes, fábricas y logística. Cada módulo usa equipos profesionales en la práctica.",
     price: "190€",
     mode: "Presencial",
     locations: "Coslada",
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
+    image: "/images/cursos/pack-mega-formacion.jpg",
     duration: "6 días (48 horas)",
     type: "pack",
     rating: 4.9,
@@ -138,13 +137,13 @@ const courses: Course[] = [
     slug: "carretilla-frontal",
     title: "Carretilla Frontal",
     shortDescription:
-      "Aprende a maniobrar carretillas frontales con precisión y seguridad",
+      "Maneja carretillas frontales, las más habituales en almacenes.",
     longDescription:
-      "Nuestro curso especializado en Carretillas Frontales ofrece una formación completa y práctica para el manejo profesional de estos equipos fundamentales en la logística y el almacenaje. La carretilla frontal es uno de los vehículos industriales más utilizados en almacenes y centros logísticos, por lo que su correcto manejo es una competencia muy demandada.\n\nEl programa formativo abarca desde los fundamentos teóricos de seguridad y normativa hasta sesiones prácticas extensivas con equipos reales, donde perfeccionarás las técnicas de conducción, manipulación de cargas y maniobras precisas.\n\nAl finalizar, obtendrás un certificado oficial conforme al RD de Prevención de Riesgos Laborales que acreditará tu capacitación para operar carretillas frontales de forma segura y eficiente en cualquier entorno industrial.",
+      "La carretilla frontal tiene el contrapeso en la parte trasera. Es la que más se ve en almacenes y centros logísticos, por eso saber manejarla es una de las competencias más pedidas.\n\nLa jornada empieza con teoría sobre seguridad y normativa. La práctica se hace con carretillas frontales reales: arranque, conducción, carga y maniobras de precisión.\n\nAl terminar recibes un certificado de formación conforme al Real Decreto 1215/1997, sobre equipos de trabajo.",
     price: "50€",
     mode: "Presencial",
     locations: "Todas las sedes",
-    image: "/public/images/cursos/forklift.webp",
+    image: "/images/cursos/forklift.webp",
     duration: "1 día (8 horas)",
     type: "equipment",
     rating: 4.8,
@@ -154,9 +153,9 @@ const courses: Course[] = [
     slug: "carretilla-retractil",
     title: "Carretilla Retráctil",
     shortDescription:
-      "Especialización en carretillas retráctiles para almacenes",
+      "Maneja carretillas retráctiles para trabajar en pasillos estrechos.",
     longDescription:
-      "Nuestro curso de Carretilla Retráctil ofrece una formación especializada para profesionales que buscan dominar este tipo específico de equipo, ideal para trabajar en pasillos estrechos y optimizar el espacio en almacenes. Las carretillas retráctiles requieren técnicas de manejo precisas y un conocimiento específico por sus características particulares.\n\nEl programa formativo incluye módulos sobre las especificaciones técnicas de estos equipos, normativas de seguridad, técnicas de conducción en espacios reducidos, gestión eficiente del almacenaje en altura y prácticas extensivas con equipos profesionales.\n\nAl concluir el curso, recibirás un certificado oficial que acreditará tu especialización en el manejo de carretillas retráctiles, una competencia altamente valorada en el sector logístico y de almacenaje.",
+      "La carretilla retráctil tiene un mástil que avanza para alcanzar la carga. Por eso trabaja en pasillos estrechos y aprovecha la altura del almacén.\n\nEl curso repasa las especificaciones técnicas de la máquina, la normativa de seguridad y la conducción en espacios reducidos. La práctica incluye la gestión del almacenaje en altura, con equipos profesionales.\n\nAl terminar recibes un certificado que acredita tu manejo de carretillas retráctiles.",
     price: "50€",
     mode: "Presencial",
     locations: "Coslada, Alcorcón",
@@ -170,14 +169,13 @@ const courses: Course[] = [
     slug: "transpaleta-electrica",
     title: "Transpaleta Eléctrica",
     shortDescription:
-      "Manejo eficiente de transpaletas eléctricas para logística",
+      "Mueve pallets por el almacén con transpaletas eléctricas.",
     longDescription:
-      "El curso de Transpaleta Eléctrica está diseñado para capacitarte en el manejo profesional de estos equipos esenciales para el transporte horizontal de mercancías. Aunque aparentemente más sencillas que otros equipos, las transpaletas eléctricas requieren técnicas específicas para su uso óptimo y seguro.\n\nDurante la formación, aprenderás sobre los diferentes modelos de transpaletas, sus sistemas de funcionamiento, normativas de seguridad, técnicas de manejo eficiente, distribución de cargas y protocolos de mantenimiento básico. El curso combina teoría concisa con extensas prácticas en entornos reales de trabajo.\n\nAl finalizar, obtendrás un certificado oficial que acreditará tus competencias para operar transpaletas eléctricas de forma profesional en cualquier entorno logístico o industrial.",
+      "La transpaleta eléctrica levanta el pallet unos centímetros y lo mueve por el suelo: dentro del almacén, hasta el camión o hasta el muelle de carga. Parece sencilla, pero la carga, la frenada y los giros en espacios pequeños requieren técnica.\n\nDurante el curso verás los distintos modelos, cómo funciona cada sistema, las normas de seguridad, la distribución de la carga y el mantenimiento básico. La formación combina teoría breve con prácticas en entornos reales de trabajo.\n\nAl terminar recibes un certificado que acredita tu manejo de transpaletas eléctricas.",
     price: "50€",
     mode: "Presencial",
     locations: "Todas las sedes",
-    image:
-      "https://images.unsplash.com/photo-1622556498246-755f44ca76f3?q=80&w=600&auto=format",
+    image: "/images/cursos/transpaleta-electrica.jpg",
     duration: "1 día (8 horas)",
     type: "equipment",
     rating: 4.6,
@@ -186,14 +184,13 @@ const courses: Course[] = [
     id: 9,
     slug: "recogepedidos",
     title: "Recogepedidos",
-    shortDescription: "Especialización en equipos para picking en altura",
+    shortDescription: "Prepara pedidos desde la plataforma de un recogepedidos, a varios metros de altura.",
     longDescription:
-      "Nuestro curso especializado en equipos Recogepedidos ofrece una formación completa para profesionales que necesitan dominar estos complejos sistemas de trabajo en altura. Los recogepedidos son equipos fundamentales en almacenes modernos que requieren una preparación específica debido a sus características técnicas y operativas.\n\nEl programa formativo aborda las particularidades de estos equipos, desde sus sistemas de seguridad y estabilización hasta las técnicas de elevación, desplazamiento y picking. Aprenderás a optimizar los procesos de preparación de pedidos en altura, maximizando la eficiencia y minimizando los riesgos laborales.\n\nLa formación incluye módulos teóricos especializados y prácticas intensivas con equipos reales en entornos simulados de almacén. Al completar el curso, recibirás una certificación oficial que acreditará tu especialización en estos sistemas avanzados de picking.",
+      "El recogepedidos es una plataforma que sube con el operario encima para coger artículos de estanterías altas. Se usa en almacenes de preparación de pedidos y necesita formación específica por su altura y su estabilidad.\n\nEl curso trata los sistemas de seguridad y estabilización, el desplazamiento, la elevación y el picking en altura. Las prácticas se hacen con equipos reales en un entorno de almacén simulado.\n\nAl terminar recibes un certificado que acredita tu especialización en picking en altura.",
     price: "50€",
     mode: "Presencial",
     locations: "Coslada, Alcorcón",
-    image:
-      "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?q=80&w=600&auto=format",
+    image: "/images/cursos/recogepedidos.jpg",
     duration: "1 día (8 horas)",
     type: "equipment",
     rating: 4.7,
@@ -202,14 +199,13 @@ const courses: Course[] = [
     id: 10,
     slug: "apilador",
     title: "Apilador",
-    shortDescription: "Manejo seguro de apiladores eléctricos",
+    shortDescription: "Apila pallets con apiladores eléctricos en pasillos de almacén.",
     longDescription:
-      "El curso de Apilador está diseñado para formar profesionales capaces de operar con seguridad y eficiencia estos equipos fundamentales en la logística moderna. Los apiladores eléctricos son versátiles y ampliamente utilizados en almacenes de diversos tamaños, combinando características de las transpaletas y las carretillas elevadoras.\n\nDurante la formación, aprenderás sobre los distintos tipos de apiladores, sus capacidades y limitaciones, normativas de seguridad aplicables, técnicas específicas de conducción y elevación, y procedimientos de trabajo seguro. El programa combina sesiones teóricas con prácticas extensivas utilizando equipos reales en entornos controlados.\n\nAl finalizar el curso, obtendrás una certificación oficial que validará tus competencias para el manejo profesional de apiladores eléctricos, una cualificación muy demandada en el sector logístico e industrial.",
+      "El apilador eléctrico levanta la carga en vertical y la deja a la altura de las estanterías. Combina rasgos de la transpaleta y de la carretilla elevadora, y sirve en almacenes de cualquier tamaño.\n\nDurante el curso aprendes los tipos de apilador, sus capacidades y limitaciones, las normas de seguridad aplicables, la conducción y la elevación, y el procedimiento de trabajo seguro. Las prácticas se hacen con equipos reales en un entorno controlado.\n\nAl terminar recibes un certificado que valida tu manejo de apiladores eléctricos.",
     price: "50€",
     mode: "Presencial",
     locations: "Todas las sedes",
-    image:
-      "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=600&auto=format",
+    image: "/images/cursos/apilador.jpg",
     duration: "1 día (8 horas)",
     type: "equipment",
     rating: 4.6,

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@mui/material";
+import ArrowForward from "@mui/icons-material/ArrowForward";
 import { useHeroImages } from "@/hooks/useHeroImages";
 import { scrollToSection } from "@/utils/scrollToSection";
 
@@ -42,7 +42,7 @@ const HeroSection = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
           >
             Curso de carretillero presencial por{" "}
-            <span className="text-accent">50€ todo incluido</span>
+            <span className="text-[#e4e4e4]">50€ todo incluido</span>
           </motion.h1>
 
           <motion.p
@@ -51,8 +51,8 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-sm sm:text-base md:text-lg text-gray-200 mb-3"
           >
-            Centros propios en Madrid y Murcia. Formación teórica y práctica con
-            carnet válido para <strong>5 máquinas</strong>.
+            Formación teórica y práctica en centros propios de Madrid y Murcia.
+            Recibes un carnet válido para <strong>5 máquinas</strong>.
           </motion.p>
 
           <motion.p
@@ -61,11 +61,9 @@ const HeroSection = () => {
             transition={{ duration: 0.7, delay: 0.3 }}
             className="text-xs sm:text-sm md:text-base text-gray-300 mb-8"
           >
-            Cumplimos <strong className="text-white">10 años</strong> sin subir
-            el precio. Apoyamos a nuestros clientes sin renunciar a la calidad
-            que nos reconoce la norma{" "}
-            <strong className="text-white">UNE 58451</strong> y{" "}
-            <strong className="text-white">UNE 58923</strong>.
+            Llevamos <strong className="text-white">10 años</strong> sin subir
+            el precio. Las normas <strong className="text-white">UNE 58451</strong> y{" "}
+            <strong className="text-white">UNE 58923</strong> reconocen la calidad de nuestra formación.
           </motion.p>
 
           <motion.div
@@ -75,18 +73,34 @@ const HeroSection = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
           >
             <Button
-              size="lg"
+              size="large"
+              variant="contained"
+              color="secondary"
+              endIcon={<ArrowForward />}
               onClick={() => scrollToSection("cta-section")}
-              className="w-full sm:w-auto bg-accent hover:bg-accent/90 text-white font-medium"
+              sx={{
+                width: { xs: "100%", sm: "auto" },
+                bgcolor: "#FFFFFF",
+                color: "#2b2b2b",
+                "&:hover": { bgcolor: "#f0f0f0" },
+              }}
             >
               Solicitar información
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
 
             <Button
-              size="lg"
+              size="large"
+              variant="outlined"
               onClick={() => scrollToSection("courses-section")}
-              className="w-full sm:w-auto bg-white/10 text-white border border-white hover:bg-white/20"
+              sx={{
+                width: { xs: "100%", sm: "auto" },
+                color: "#FFFFFF",
+                borderColor: "#FFFFFF",
+                "&:hover": {
+                  borderColor: "#FFFFFF",
+                  bgcolor: "rgba(255, 255, 255, 0.12)",
+                },
+              }}
             >
               Ver cursos disponibles
             </Button>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { cn } from "@/lib/utils";
+import { Link, useLocation } from "react-router-dom";
+import { AppBar, Button, Stack, Toolbar } from "@mui/material";
+import { colors } from "@/theme/tokens";
 
 interface HeaderProps {
   variant?: "default" | "black";
@@ -28,51 +29,61 @@ const Header = ({ variant = "default" }: HeaderProps) => {
     }
   };
 
-  return (
-    <header
-      className={cn(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        variant === "black"
-          ? "bg-black shadow-md py-6"
-          : isScrolled
-          ? "bg-white shadow-md py-6"
-          : "bg-transparent py-6"
-      )}
-    >
-      <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-        <div className="flex items-center">
-          <Link
-            to="/"
-            onClick={scrollToTop}
-            className={cn(
-              "text-xl md:text-2xl font-bold transition-colors",
-              variant === "black"
-                ? "text-white hover:text-gray-200"
-                : isScrolled
-                ? "text-black hover:text-gray-800"
-                : "text-white hover:text-gray-200"
-            )}
-          >
-            TuCarretillero
-          </Link>
-        </div>
+  const { pathname } = useLocation();
+  const isBlack = variant === "black";
+  // Transparent only at the top of the home page, where the bar merges with the hero photo.
+  const isOnHero = pathname === "/" && !isBlack && !isScrolled;
 
-        <div className="flex items-center space-x-3">
-          <Link
+  const buttonSx = {
+    bgcolor: isOnHero ? colors.white : colors.black,
+    color: isOnHero ? colors.dark : colors.white,
+    "&:hover": { bgcolor: isOnHero ? "#f0f0f0" : colors.dark },
+  };
+
+  return (
+    <AppBar
+      position="fixed"
+      color="inherit"
+      elevation={isOnHero ? 0 : 4}
+      sx={{
+        bgcolor: isBlack ? colors.black : isOnHero ? "transparent" : colors.white,
+        color: isOnHero || isBlack ? colors.white : colors.dark,
+        transition: "all 300ms",
+      }}
+    >
+      <Toolbar
+        disableGutters
+        className="container mx-auto px-4 md:px-8 justify-between"
+        sx={{ py: 3, minHeight: "auto" }}
+      >
+        <Link to="/" onClick={scrollToTop} aria-label="TuCarretillero, ir al inicio" className="flex">
+          {/* Reversed to white over the hero and the black bar, natural colors on the white bar */}
+          <img
+            src="/logo-transparent.png"
+            alt="TuCarretillero"
+            className="h-9 md:h-11 w-auto block"
+            style={{
+              filter: isOnHero || isBlack ? "brightness(0) invert(1)" : "none",
+              transition: "filter 300ms",
+            }}
+          />
+        </Link>
+
+        <Stack direction="row" spacing={1.5} alignItems="center">
+          <Button
+            component={Link}
             to="/cursos"
-            className="hidden md:inline-block py-2 px-5 text-sm font-medium rounded-md shadow-sm transition-all bg-accent text-white hover:bg-accent/90"
+            variant="contained"
+            sx={{ ...buttonSx, display: { xs: "none", md: "inline-flex" } }}
           >
             Cursos
-          </Link>
-          <button
-            onClick={scrollToContact}
-            className="py-2 px-5 text-sm font-medium rounded-md shadow-sm transition-all bg-accent text-white hover:bg-accent/90"
-          >
+          </Button>
+          <Button variant="contained" onClick={scrollToContact} sx={buttonSx}>
             Contáctanos
-          </button>
-        </div>
-      </div>
-    </header>
+          </Button>
+        </Stack>
+      </Toolbar>
+    </AppBar>
   );
 };
 

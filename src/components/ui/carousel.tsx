@@ -2,10 +2,11 @@ import * as React from "react"
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
 } from "embla-carousel-react"
-import { ArrowLeft, ArrowRight } from "lucide-react"
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import ArrowForward from "@mui/icons-material/ArrowForward";
+import { IconButton } from "@mui/material"
 
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
 
 type CarouselApi = UseEmblaCarouselType[1]
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
@@ -194,58 +195,52 @@ CarouselItem.displayName = "CarouselItem"
 
 const CarouselPrevious = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+  React.ComponentProps<typeof IconButton>
+>(({ ...props }, ref) => {
+  const { scrollPrev, canScrollPrev } = useCarousel()
 
   return (
-    <Button
+    <IconButton
       ref={ref}
-      variant={variant}
-      size={size}
-      className={cn(
-        "absolute  h-8 w-8 rounded-full",
-        orientation === "horizontal"
-          ? "-left-12 top-1/2 -translate-y-1/2"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )}
+      aria-label="Anterior"
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      sx={{
+        border: 1,
+        borderColor: "divider",
+        bgcolor: "background.paper",
+        boxShadow: 1,
+      }}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
-      <span className="sr-only">Previous slide</span>
-    </Button>
+      <ArrowBack fontSize="small" />
+    </IconButton>
   )
 })
 CarouselPrevious.displayName = "CarouselPrevious"
 
 const CarouselNext = React.forwardRef<
   HTMLButtonElement,
-  React.ComponentProps<typeof Button>
->(({ className, variant = "outline", size = "icon", ...props }, ref) => {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+  React.ComponentProps<typeof IconButton>
+>(({ ...props }, ref) => {
+  const { scrollNext, canScrollNext } = useCarousel()
 
   return (
-    <Button
+    <IconButton
       ref={ref}
-      variant={variant}
-      size={size}
-      className={cn(
-        "absolute h-8 w-8 rounded-full",
-        orientation === "horizontal"
-          ? "-right-12 top-1/2 -translate-y-1/2"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
-        className
-      )}
+      aria-label="Siguiente"
       disabled={!canScrollNext}
       onClick={scrollNext}
+      sx={{
+        border: 1,
+        borderColor: "divider",
+        bgcolor: "background.paper",
+        boxShadow: 1,
+      }}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
-      <span className="sr-only">Next slide</span>
-    </Button>
+      <ArrowForward fontSize="small" />
+    </IconButton>
   )
 })
 CarouselNext.displayName = "CarouselNext"

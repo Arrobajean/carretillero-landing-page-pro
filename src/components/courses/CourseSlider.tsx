@@ -1,7 +1,8 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { IconButton, Typography } from '@mui/material';
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import ArrowForward from "@mui/icons-material/ArrowForward";
 import CourseCard from '@/components/courses/CourseCard';
 import { motion } from 'framer-motion';
 import { Course } from '@/data/courses';
@@ -21,9 +22,9 @@ interface CourseSliderProps {
   autoRotateInterval?: number;
 }
 
-const CourseSlider = ({ 
-  courses, 
-  title, 
+const CourseSlider = ({
+  courses,
+  title,
   description,
   autoRotate = true,
   autoRotateInterval = 5000
@@ -31,14 +32,14 @@ const CourseSlider = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const maxIndex = Math.max(0, Math.ceil(courses.length / 3) - 1);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-  
+
   // Auto rotation effect
   useEffect(() => {
     if (autoRotate && courses.length > 3) {
       intervalRef.current = setInterval(() => {
         setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
       }, autoRotateInterval);
-      
+
       return () => {
         if (intervalRef.current) {
           clearInterval(intervalRef.current);
@@ -46,7 +47,7 @@ const CourseSlider = ({
       };
     }
   }, [autoRotate, courses.length, maxIndex, autoRotateInterval]);
-  
+
   // Stop auto-rotation when user interacts
   const handleManualNavigation = (index: number) => {
     if (intervalRef.current) {
@@ -60,8 +61,8 @@ const CourseSlider = ({
     <div className="hidden md:block">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {courses.slice(currentIndex * 3, (currentIndex * 3) + 3).map((course) => (
-          <motion.div 
-            key={course.id} 
+          <motion.div
+            key={course.id}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -71,20 +72,18 @@ const CourseSlider = ({
           </motion.div>
         ))}
       </div>
-      
+
       {/* Pagination Controls */}
       {courses.length > 3 && (
-        <div className="flex justify-center mt-8 gap-4">
-          <Button 
-            variant="outline" 
-            size="icon" 
+        <div className="flex justify-center items-center mt-8 gap-4">
+          <IconButton
+            aria-label="Anterior"
             onClick={() => handleManualNavigation(currentIndex <= 0 ? maxIndex : currentIndex - 1)}
-            className="rounded-full"
+            sx={{ border: 1, borderColor: 'divider' }}
           >
-            <ArrowLeft size={16} />
-            <span className="sr-only">Anterior</span>
-          </Button>
-          
+            <ArrowBack fontSize="small" />
+          </IconButton>
+
           <div className="flex gap-2 items-center">
             {Array.from({ length: maxIndex + 1 }).map((_, idx) => (
               <button
@@ -97,16 +96,14 @@ const CourseSlider = ({
               />
             ))}
           </div>
-          
-          <Button 
-            variant="outline" 
-            size="icon" 
+
+          <IconButton
+            aria-label="Siguiente"
             onClick={() => handleManualNavigation(currentIndex >= maxIndex ? 0 : currentIndex + 1)}
-            className="rounded-full"
+            sx={{ border: 1, borderColor: 'divider' }}
           >
-            <ArrowRight size={16} />
-            <span className="sr-only">Siguiente</span>
-          </Button>
+            <ArrowForward fontSize="small" />
+          </IconButton>
         </div>
       )}
     </div>
@@ -131,30 +128,29 @@ const CourseSlider = ({
             </CarouselItem>
           ))}
         </CarouselContent>
-        <div className="flex justify-center mt-6 gap-2">
-          <CarouselPrevious className="static translate-y-0 mx-2" />
-          <CarouselNext className="static translate-y-0 mx-2" />
-        </div>
+        {courses.length > 3 && (
+          <div className="flex justify-center mt-6 gap-2">
+            <CarouselPrevious />
+            <CarouselNext />
+          </div>
+        )}
       </Carousel>
     </div>
   );
 
   return (
-    <section className="py-12 md:py-16">
-      <div className="text-center mb-8">
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+    <section className="py-12 md:py-16 min-h-0">
+      <div className="mb-8">
+        <Typography variant="h4" component="h2" sx={{ color: 'text.primary', mb: 1 }}>
           {title}
-        </h2>
+        </Typography>
         {description && (
-          <>
-            <div className="h-1.5 w-24 bg-accent mx-auto rounded-full mb-4"></div>
-            <p className="text-gray-700 mt-4 max-w-2xl mx-auto">
-              {description}
-            </p>
-          </>
+          <Typography color="text.secondary" sx={{ maxWidth: '60ch' }}>
+            {description}
+          </Typography>
         )}
       </div>
-      
+
       <DesktopView />
       <MobileView />
     </section>

@@ -1,44 +1,56 @@
 
 import { useParams, Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { MapPin, Calendar, Phone, MessageSquare, Wrench, Star } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Breadcrumbs,
+  Button,
+  IconButton,
+  Link as MuiLink,
+  List,
+  ListItem,
+  ListItemIcon,
+  Rating,
+  Skeleton,
+  Stack,
+  Typography,
+} from '@mui/material';
+import CalendarMonth from "@mui/icons-material/CalendarMonth";
+import Build from "@mui/icons-material/Build";
+import CheckCircle from "@mui/icons-material/CheckCircle";
+import Chat from "@mui/icons-material/Chat";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import Phone from "@mui/icons-material/Phone";
+import Place from "@mui/icons-material/Place";
+import Schedule from "@mui/icons-material/Schedule";
 import { motion } from 'framer-motion';
 import { useToast } from '@/hooks/use-toast';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import courses, { Course } from '@/data/courses';
-import { cn } from '@/lib/utils';
 import RatingStars from '@/components/courses/RatingStars';
 import CourseSlider from '@/components/courses/CourseSlider';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { useImageReady } from '@/hooks/useImageReady';
+import { fonts } from '@/theme/tokens';
 
 const CourseDetail = () => {
   const { slug } = useParams();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
   const [userRating, setUserRating] = useState<number | null>(null);
-  const [hoverRating, setHoverRating] = useState<number | null>(null);
   const [votes, setVotes] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
   const { toast } = useToast();
-  
+  const isImageReady = useImageReady(course?.image);
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    
+
     const foundCourse = courses.find((c) => c.slug === slug);
-    
+
     if (foundCourse) {
       setCourse(foundCourse);
       // Initialize with random vote count and the course's rating
@@ -46,23 +58,23 @@ const CourseDetail = () => {
       setVotes(initialVotes);
       setAverageRating(foundCourse.rating || 4.5);
     }
-    
+
     setLoading(false);
   }, [slug]);
 
   // Function to handle user rating
   const handleRating = (rating: number) => {
     setUserRating(rating);
-    
+
     // Calculate new average rating - simulate backend processing
     const newTotalStars = averageRating * votes + rating;
     const newVotes = votes + 1;
     const newAverageRating = newTotalStars / newVotes;
-    
+
     // Update state
     setVotes(newVotes);
     setAverageRating(newAverageRating);
-    
+
     toast({
       title: "¡Gracias por tu valoración!",
       description: `Has valorado este curso con ${rating} ${rating === 1 ? 'estrella' : 'estrellas'}.`,
@@ -72,52 +84,13 @@ const CourseDetail = () => {
     console.log(`User rated course ${course?.id} with ${rating} stars`);
   };
 
-  // Function to render interactive rating stars for user input
-  const renderUserRatingStars = () => {
-    return (
-      <div className="flex flex-col items-center sm:items-start gap-3">
-        <span className="text-lg font-medium text-gray-700">Valora este curso:</span>
-        <div className="flex gap-2">
-          {[1, 2, 3, 4, 5].map((star) => (
-            <button
-              key={star}
-              type="button"
-              onClick={() => handleRating(star)}
-              onMouseEnter={() => setHoverRating(star)}
-              onMouseLeave={() => setHoverRating(null)}
-              className="focus:outline-none group"
-              aria-label={`Puntuar ${star} ${star === 1 ? 'estrella' : 'estrellas'}`}
-            >
-              <Star 
-                size={32} 
-                className={cn(
-                  "transition-all duration-200",
-                  (hoverRating !== null ? star <= hoverRating : star <= (userRating || 0))
-                    ? "fill-yellow-400 text-yellow-400 scale-110"
-                    : "text-gray-300 group-hover:text-yellow-400"
-                )}
-              />
-            </button>
-          ))}
-        </div>
-        {userRating && (
-          <div className="mt-2 text-center sm:text-left">
-            <span className="text-base font-semibold text-accent animate-fade-in">
-              ¡Gracias por tu valoración!
-            </span>
-          </div>
-        )}
-      </div>
-    );
-  };
-
   const openWhatsApp = () => {
     if (course) {
       window.open(
         `https://wa.me/+34600000000?text=Hola, estoy interesado en el ${course.title}. ¿Podrían darme más información?`,
         '_blank'
       );
-      
+
       toast({
         title: "WhatsApp",
         description: "Abriendo chat de WhatsApp...",
@@ -127,8 +100,12 @@ const CourseDetail = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex justify-center items-center">
-        <div className="animate-pulse text-2xl">Cargando...</div>
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <Box sx={{ flexGrow: 1, width: '100%', maxWidth: 1280, mx: 'auto', px: { xs: 2, md: 4 }, pt: { xs: 16, md: 20 }, pb: 12 }}>
+          <Skeleton variant="text" sx={{ fontSize: '3rem', maxWidth: 640, mb: 3 }} />
+          <Skeleton variant="rectangular" sx={{ width: '100%', aspectRatio: '16 / 9', borderRadius: '12px' }} />
+        </Box>
       </div>
     );
   }
@@ -137,261 +114,311 @@ const CourseDetail = () => {
     return (
       <div className="min-h-screen flex flex-col">
         <Header />
-        <div className="container-section py-20 flex-grow flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold mb-6 text-center">Curso no encontrado</h1>
-          <p className="text-gray-600 mb-8 text-center">
-            Lo sentimos, no hemos podido encontrar el curso que estás buscando.
-          </p>
-          <Link to="/" className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary/90 transition-colors">
-            Volver a la página principal
-          </Link>
-        </div>
+        <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 3, px: 2, pt: 20, pb: 12, textAlign: 'center' }}>
+          <Typography variant="h3" component="h1">
+            No encontramos ese curso
+          </Typography>
+          <Typography color="text.secondary">
+            Puede que el enlace sea antiguo o que el curso ya no esté en el catálogo.
+          </Typography>
+          <Button component={Link} to="/" variant="contained" size="large">
+            Volver al inicio
+          </Button>
+        </Box>
         <Footer />
       </div>
     );
   }
 
-  // Get related courses of the same type, excluding the current course
-  const relatedCourses = courses
-    .filter(c => c.id !== course.id && c.type === course.type)
-    .slice(0, 6);
+  // Three related courses: same type first, topped up with other courses when there are not enough
+  const sameType = courses.filter(c => c.id !== course.id && c.type === course.type);
+  const otherTypes = courses.filter(c => c.id !== course.id && c.type !== course.type);
+  const relatedCourses = [...sameType, ...otherTypes].slice(0, 3);
+
+  const typeLabel = course.type === 'course' ? 'Curso' : course.type === 'pack' ? 'Pack formativo' : 'Equipo';
+
+  // Key facts shown in the strip under the title
+  const facts = [
+    { label: 'Modalidad', value: course.mode, icon: <CalendarMonth fontSize="small" /> },
+    { label: 'Ubicaciones', value: course.locations, icon: <Place fontSize="small" /> },
+    { label: 'Duración', value: course.duration, icon: <Schedule fontSize="small" /> },
+    { label: 'Tipo', value: typeLabel, icon: <Build fontSize="small" /> },
+  ].filter((fact) => Boolean(fact.value));
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-grow pt-24 md:pt-28">
-        <div className="bg-gradient-to-b from-gray-50 to-white">
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl">
-            {/* Enhanced Breadcrumbs */}
-            <Breadcrumb className="py-4 mb-6">
-              <BreadcrumbList className="animate-fade-in">
-                <BreadcrumbItem>
-                  <Link to="/" className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground">
-                    Inicio
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <Link to="/cursos" className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground">
-                    Cursos
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="font-medium">{course?.title}</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Main Content - 2/3 */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="lg:col-span-2"
-              >
-                {/* Enhanced Course Title and Rating */}
-                <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{course?.title}</h1>
-                
-                {/* Enhanced Rating display */}
-                <div className="flex items-center gap-2 mb-6">
-                  <RatingStars rating={averageRating} votes={votes} />
-                </div>
-                
-                {/* Enhanced Image */}
-                <div className="rounded-xl overflow-hidden mb-10 shadow-md hover:shadow-lg transition-shadow duration-300">
-                  <img 
-                    src={course?.image} 
-                    alt={course?.title} 
-                    className="w-full h-auto object-cover aspect-[16/9]"
-                  />
-                </div>
+      <Box
+        component="main"
+        sx={{ flexGrow: 1, bgcolor: 'background.default', pt: { xs: 16, md: 20 }, pb: { xs: 16, lg: 12 } }}
+      >
+        <Box sx={{ maxWidth: 1280, mx: 'auto', px: { xs: 2, md: 4 } }}>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+            <MuiLink component={Link} to="/" underline="hover" color="text.secondary" sx={{ fontWeight: 500 }}>
+              Inicio
+            </MuiLink>
+            <MuiLink component={Link} to="/cursos" underline="hover" color="text.secondary" sx={{ fontWeight: 500 }}>
+              Cursos
+            </MuiLink>
+            <Typography sx={{ fontWeight: 500, color: 'text.primary' }}>{course.title}</Typography>
+          </Breadcrumbs>
 
-                {/* User Rating Section - Enhanced */}
-                <Card className="mb-10 border-0 shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
-                  <CardContent className="p-6 bg-white rounded-xl">
-                    <h3 className="text-xl font-semibold mb-6 border-b pb-3 text-gray-800">¿Qué te ha parecido este curso?</h3>
-                    {renderUserRatingStars()}
-                  </CardContent>
-                </Card>
-                
-                {/* Tabs for mobile */}
-                <div className="lg:hidden grid grid-cols-2 gap-3 mb-8">
-                  <Button 
-                    onClick={openWhatsApp}
-                    variant="default" 
-                    className="bg-accent hover:bg-accent/90 text-white flex items-center gap-2 h-14 text-base"
-                  >
-                    <MessageSquare size={20} />
-                    WhatsApp
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="flex items-center gap-2 h-14 text-base border-gray-300 hover:bg-gray-50"
-                    asChild
-                  >
-                    <a href="tel:+34600000000">
-                      <Phone size={20} />
-                      Llamar
-                    </a>
-                  </Button>
-                </div>
-                
-                {/* Enhanced Description */}
-                <div className="prose max-w-none mb-10">
-                  <h2 className="text-2xl font-semibold mb-6 text-gray-800">Descripción del curso</h2>
-                  {course?.longDescription.split('\n\n').map((paragraph, index) => (
-                    <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-                
-                {/* Enhanced Syllabus */}
-                {course?.syllabus && course.syllabus.length > 0 && (
-                  <div className="mb-10">
-                    <h2 className="text-2xl font-semibold mb-6 text-gray-800">Contenido del curso</h2>
-                    <div className="bg-gray-50 rounded-xl p-6 shadow-sm">
-                      <ul className="space-y-3">
-                        {course.syllabus.map((item, index) => (
-                          <li key={index} className="flex items-start gap-3">
-                            <span className="text-accent flex-shrink-0 mt-1">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-check-circle">
-                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                                <polyline points="22 4 12 14.01 9 11.01" />
-                              </svg>
-                            </span>
-                            <span className="text-gray-700 font-medium">{item}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-                
-                {/* Enhanced FAQs */}
-                {course?.faqs && course.faqs.length > 0 && (
-                  <div className="mb-10">
-                    <h2 className="text-2xl font-semibold mb-6 text-gray-800">Preguntas frecuentes</h2>
-                    <Accordion type="single" collapsible className="w-full bg-white rounded-xl shadow-sm">
-                      {course.faqs.map((faq, index) => (
-                        <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-100">
-                          <AccordionTrigger className="text-left py-4 px-6 hover:no-underline hover:bg-gray-50 rounded-t-xl">
-                            <span className="font-medium text-gray-900">{faq.question}</span>
-                          </AccordionTrigger>
-                          <AccordionContent className="px-6 pb-4">
-                            <p className="text-gray-700">{faq.answer}</p>
-                          </AccordionContent>
-                        </AccordionItem>
-                      ))}
-                    </Accordion>
-                  </div>
-                )}
-              </motion.div>
-              
-              {/* Sidebar - Enhanced */}
-              <motion.div 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="lg:col-span-1"
+          <Box
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: { xs: '1fr', lg: 'minmax(0, 1fr) 340px' },
+              gap: { xs: 4, lg: 8 },
+              alignItems: 'start',
+            }}
+          >
+            {/* Main column */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Typography
+                variant="h1"
+                component="h1"
+                sx={{ fontSize: { xs: '2.25rem', md: '3rem' }, maxWidth: '18ch', mb: 2 }}
               >
-                <Card className="sticky top-28 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden border-0">
-                  <CardContent className="p-0">
-                    <div className="bg-gradient-to-br from-primary/5 to-transparent p-6">
-                      <div className="flex items-center justify-between mb-6">
-                        <h2 className="text-xl font-bold text-gray-900">Información del curso</h2>
-                        <Badge className="bg-green-100 text-green-800 hover:bg-green-100 border border-green-200 text-lg px-3 py-1 rounded-xl">
-                          {course?.price}
-                        </Badge>
-                      </div>
-                      
-                      <Separator className="my-6 bg-gray-200" />
-                      
-                      <div className="space-y-5 mb-8">
-                        {course?.mode && (
-                          <div className="flex items-start gap-3">
-                            <Calendar size={20} className="text-accent flex-shrink-0 mt-1" />
-                            <div>
-                              <p className="font-semibold text-gray-900">Modalidad</p>
-                              <p className="text-gray-700">{course.mode}</p>
-                            </div>
-                          </div>
-                        )}
-                        
-                        {course?.locations && (
-                          <div className="flex items-start gap-3">
-                            <MapPin size={20} className="text-accent flex-shrink-0 mt-1" />
-                            <div>
-                              <p className="font-semibold text-gray-900">Ubicaciones</p>
-                              <p className="text-gray-700">{course.locations}</p>
-                            </div>
-                          </div>
-                        )}
-                        
-                        {course?.duration && (
-                          <div className="flex items-start gap-3">
-                            <Calendar size={20} className="text-accent flex-shrink-0 mt-1" />
-                            <div>
-                              <p className="font-semibold text-gray-900">Duración</p>
-                              <p className="text-gray-700">{course.duration}</p>
-                            </div>
-                          </div>
-                        )}
-                        
-                        {course?.type && (
-                          <div className="flex items-start gap-3">
-                            <Wrench size={20} className="text-accent flex-shrink-0 mt-1" />
-                            <div>
-                              <p className="font-semibold text-gray-900">Tipo</p>
-                              <p className="text-gray-700">
-                                {course.type === 'course' ? 'Curso' : 
-                                course.type === 'pack' ? 'Pack Formativo' : 'Equipo'}
-                              </p>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    
-                    <div className="p-6 space-y-4">
-                      <Button 
-                        onClick={openWhatsApp}
-                        className="w-full bg-accent hover:bg-accent/90 flex items-center justify-center gap-2 h-auto py-4 text-base font-medium shadow-sm"
+                {course.title}
+              </Typography>
+
+              <Box sx={{ mb: 4 }}>
+                <RatingStars rating={averageRating} votes={votes} size="small" />
+              </Box>
+
+              <Box sx={{ position: 'relative', aspectRatio: '16 / 9', borderRadius: '12px', overflow: 'hidden', mb: 5 }}>
+                {!isImageReady && (
+                  <Skeleton variant="rectangular" sx={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+                )}
+                <Box
+                  component="img"
+                  src={course.image}
+                  alt={course.title}
+                  sx={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </Box>
+
+              {facts.length > 0 && (
+                <Box
+                  component="dl"
+                  sx={{
+                    display: 'grid',
+                    gridTemplateColumns: { xs: 'repeat(2, minmax(0, 1fr))', md: `repeat(${facts.length}, minmax(0, 1fr))` },
+                    borderTop: 1,
+                    borderBottom: 1,
+                    borderColor: 'divider',
+                    m: 0,
+                    mb: 8,
+                  }}
+                >
+                  {facts.map((fact) => (
+                    <Box key={fact.label} sx={{ py: 2.5, pr: 2 }}>
+                      <Typography
+                        component="dt"
+                        variant="body2"
+                        sx={{ color: 'text.secondary', display: 'flex', alignItems: 'center', gap: 0.75, mb: 0.5 }}
                       >
-                        <MessageSquare size={20} />
-                        Consultar por WhatsApp
-                      </Button>
-                      <Button 
-                        variant="outline"
-                        className="w-full flex items-center justify-center gap-2 h-auto py-4 text-base font-medium border-gray-300 hover:bg-gray-50 shadow-sm"
-                        asChild
+                        {fact.icon}
+                        {fact.label}
+                      </Typography>
+                      <Typography component="dd" sx={{ m: 0, fontWeight: 600, color: 'text.primary' }}>
+                        {fact.value}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              )}
+
+              <Box component="section" sx={{ mb: 8, minHeight: 0 }}>
+                <Typography variant="h4" component="h2" sx={{ mb: 3 }}>
+                  Descripción del curso
+                </Typography>
+                {course.longDescription.split('\n\n').map((paragraph, index) => (
+                  <Typography
+                    key={index}
+                    sx={{ maxWidth: '68ch', fontSize: '1.0625rem', lineHeight: 1.7, color: 'text.primary', mb: 2 }}
+                  >
+                    {paragraph}
+                  </Typography>
+                ))}
+              </Box>
+
+              {course.syllabus && course.syllabus.length > 0 && (
+                <Box component="section" sx={{ mb: 8, minHeight: 0 }}>
+                  <Typography variant="h4" component="h2" sx={{ mb: 3 }}>
+                    Contenido del curso
+                  </Typography>
+                  <List disablePadding>
+                    {course.syllabus.map((item, index) => (
+                      <ListItem
+                        key={index}
+                        disableGutters
+                        sx={{ alignItems: 'flex-start', py: 1.5, borderBottom: 1, borderColor: 'divider' }}
                       >
-                        <a href="tel:+34600000000">
-                          <Phone size={20} />
-                          Llamar
-                        </a>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </div>
-            
-            {/* Related Courses Section - Enhanced */}
-            <div className="my-12">
-              <CourseSlider
-                courses={relatedCourses}
-                title="Otros cursos que podrían interesarte"
-                description="Descubre más cursos y certificaciones para ampliar tus habilidades profesionales"
-                autoRotate={true}
-                autoRotateInterval={6000}
-              />
-            </div>
-          </div>
-        </div>
-      </main>
+                        <ListItemIcon sx={{ minWidth: 36, mt: 0.25 }}>
+                          <CheckCircle sx={{ color: 'primary.main' }} />
+                        </ListItemIcon>
+                        <Typography sx={{ fontWeight: 500 }}>{item}</Typography>
+                      </ListItem>
+                    ))}
+                  </List>
+                </Box>
+              )}
+
+              {course.faqs && course.faqs.length > 0 && (
+                <Box component="section" sx={{ mb: 8, minHeight: 0 }}>
+                  <Typography variant="h4" component="h2" sx={{ mb: 3 }}>
+                    Preguntas frecuentes
+                  </Typography>
+                  {course.faqs.map((faq, index) => (
+                    <Accordion
+                      key={index}
+                      disableGutters
+                      elevation={0}
+                      square
+                      sx={{
+                        bgcolor: 'transparent',
+                        borderTop: 1,
+                        borderColor: 'divider',
+                        '&:last-of-type': { borderBottom: 1 },
+                        '&:before': { display: 'none' },
+                      }}
+                    >
+                      <AccordionSummary expandIcon={<ExpandMore />} sx={{ px: 0 }}>
+                        <Typography sx={{ fontWeight: 500, color: 'text.primary' }}>{faq.question}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails sx={{ px: 0, pb: 3 }}>
+                        <Typography sx={{ color: 'text.primary', maxWidth: '68ch' }}>{faq.answer}</Typography>
+                      </AccordionDetails>
+                    </Accordion>
+                  ))}
+                </Box>
+              )}
+
+              <Box component="section" sx={{ pt: 4, minHeight: 0, borderTop: 1, borderColor: 'divider' }}>
+                <Typography variant="h5" component="h2" sx={{ mb: 2 }}>
+                  ¿Qué te ha parecido este curso?
+                </Typography>
+                <Stack direction="row" alignItems="center" flexWrap="wrap" useFlexGap spacing={2}>
+                  <Rating
+                    size="large"
+                    value={userRating}
+                    onChange={(_, value) => {
+                      if (value) handleRating(value);
+                    }}
+                  />
+                  {userRating && (
+                    <Typography sx={{ fontWeight: 600, color: 'primary.main' }}>
+                      ¡Gracias por tu valoración!
+                    </Typography>
+                  )}
+                </Stack>
+              </Box>
+            </motion.div>
+
+            {/* Purchase panel: one surface, sticky on desktop */}
+            <Box
+              component="aside"
+              sx={{
+                display: { xs: 'none', lg: 'block' },
+                position: 'sticky',
+                top: 120,
+                bgcolor: 'background.paper',
+                border: 1,
+                borderColor: 'divider',
+                borderRadius: '16px',
+                p: 3.5,
+                boxShadow: '0 16px 40px rgba(27, 27, 27, 0.1)',
+              }}
+            >
+              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                Precio
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: fonts.numbers,
+                  fontWeight: 700,
+                  fontSize: '3rem',
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.04em',
+                  fontVariantNumeric: 'tabular-nums',
+                  color: 'text.primary',
+                  mb: 3,
+                }}
+              >
+                {course.price}
+              </Typography>
+              <Stack spacing={1.5}>
+                <Button
+                  onClick={openWhatsApp}
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  fullWidth
+                  startIcon={<Chat />}
+                >
+                  Consultar por WhatsApp
+                </Button>
+                <Button href="tel:+34600000000" variant="outlined" size="large" fullWidth startIcon={<Phone />}>
+                  Llamar
+                </Button>
+              </Stack>
+            </Box>
+          </Box>
+
+          {/* Related courses */}
+          <Box sx={{ mt: 12 }}>
+            <CourseSlider
+              courses={relatedCourses}
+              title="Otros cursos que podrían interesarte"
+              description="Más formaciones que puedes hacer con nosotros"
+              autoRotate={true}
+              autoRotateInterval={6000}
+            />
+          </Box>
+        </Box>
+      </Box>
+
+      {/* Mobile action bar: price and contact always within reach */}
+      <Box
+        sx={{
+          display: { xs: 'flex', lg: 'none' },
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 1000,
+          alignItems: 'center',
+          gap: 2,
+          px: 2,
+          py: 1.5,
+          bgcolor: 'background.paper',
+          borderTop: 1,
+          borderColor: 'divider',
+          boxShadow: '0 -8px 24px rgba(27, 27, 27, 0.08)',
+        }}
+      >
+        <Box sx={{ mr: 'auto' }}>
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            Precio
+          </Typography>
+          <Typography
+            sx={{ fontFamily: fonts.numbers, fontWeight: 700, fontSize: '1.5rem', lineHeight: 1.1, fontVariantNumeric: 'tabular-nums' }}
+          >
+            {course.price}
+          </Typography>
+        </Box>
+        <Button onClick={openWhatsApp} variant="contained" color="secondary" startIcon={<Chat />}>
+          WhatsApp
+        </Button>
+        <IconButton href="tel:+34600000000" aria-label="Llamar" sx={{ border: 1, borderColor: 'divider' }}>
+          <Phone />
+        </IconButton>
+      </Box>
+
       <Footer />
     </div>
   );

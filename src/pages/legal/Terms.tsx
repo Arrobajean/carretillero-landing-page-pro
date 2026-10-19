@@ -1,12 +1,11 @@
 import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
-import { File } from "lucide-react";
+  Breadcrumbs,
+  Link as MuiLink,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Article from "@mui/icons-material/Article";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
@@ -15,32 +14,22 @@ const Terms = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header variant="black" />
-      <main className="flex-grow pt-24 pb-16">
+      <main className="flex-grow pt-28 pb-16">
         <div className="container mx-auto px-4 md:px-8">
-          <Breadcrumb className="mb-8">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <Link
-                  to="/"
-                  className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground"
-                >
-                  Inicio
-                </Link>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Términos y Condiciones</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+            <MuiLink component={Link} to="/" underline="hover" color="text.secondary" sx={{ fontWeight: 500 }}>
+              Inicio
+            </MuiLink>
+            <Typography sx={{ fontWeight: 500, color: "text.primary" }}>Términos y Condiciones</Typography>
+          </Breadcrumbs>
 
-          <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-sm p-6 md:p-8">
-            <div className="flex items-center gap-3 mb-6">
-              <File className="h-8 w-8 text-primary" />
-              <h1 className="text-3xl font-bold text-gray-900">
+          <Paper elevation={1} className="max-w-3xl mx-auto p-6 md:p-8">
+            <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 3 }}>
+              <Article sx={{ fontSize: 32, color: "primary.main" }} />
+              <Typography variant="h3" component="h1" sx={{ fontSize: "1.875rem", color: "text.primary" }}>
                 Términos y Condiciones
-              </h1>
-            </div>
+              </Typography>
+            </Stack>
 
             <div className="prose prose-gray max-w-none space-y-6">
               <p className="text-gray-600 text-sm">
@@ -209,7 +198,7 @@ const Terms = () => {
                 </div>
               </section>
             </div>
-          </div>
+          </Paper>
         </div>
       </main>
       <Footer />

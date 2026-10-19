@@ -1,5 +1,6 @@
 import { useState } from "react";
-import courses from "@/data/courses";
+import courses, { Course } from "@/data/courses";
+import { rankByMatch } from "@/utils/rankByMatch";
 
 export type Location =
   | "Todos"
@@ -13,7 +14,7 @@ export function useCoursesFilter() {
   const [selectedLocation, setSelectedLocation] = useState<Location>("Todos");
   const [activeTab, setActiveTab] = useState<TabType>("all");
 
-  const filteredCourses = courses.filter((course) => {
+  const isMatch = (course: Course) => {
     const locationMatch =
       course.type !== "equipment"
         ? selectedLocation === "Todos" ||
@@ -27,13 +28,16 @@ export function useCoursesFilter() {
       (activeTab === "equipment" && course.type === "equipment");
 
     return locationMatch && tabMatch;
-  });
+  };
+
+  // Every course stays in the list; the ones matching the filters come first
+  const rankedCourses = rankByMatch(courses, isMatch);
 
   return {
     selectedLocation,
     setSelectedLocation,
     activeTab,
     setActiveTab,
-    filteredCourses,
+    rankedCourses,
   };
 }

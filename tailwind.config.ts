@@ -1,5 +1,6 @@
 
 import type { Config } from "tailwindcss";
+import { colors } from "./src/theme/tokens";
 
 export default {
 	darkMode: ["class"],
@@ -15,7 +16,7 @@ export default {
 			center: true,
 			padding: '2rem',
 			screens: {
-				'2xl': '1400px'
+				'2xl': '1560px'
 			}
 		},
 		extend: {
@@ -26,16 +27,16 @@ export default {
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
 				primary: {
-					DEFAULT: '#1E3A8A',
-					foreground: '#FFFFFF'
+					DEFAULT: colors.dark,
+					foreground: colors.white
 				},
 				secondary: {
-					DEFAULT: '#F3F4F6',
-					foreground: '#111827'
+					DEFAULT: colors.light,
+					foreground: colors.dark
 				},
 				accent: {
-					DEFAULT: '#84CC16',
-					foreground: '#FFFFFF'
+					DEFAULT: colors.black,
+					foreground: colors.white
 				},
 				destructive: {
 					DEFAULT: 'hsl(var(--destructive))',
@@ -65,8 +66,7 @@ export default {
 				}
 			},
 			fontFamily: {
-				inter: ['Inter', 'sans-serif'],
-				poppins: ['Poppins', 'sans-serif'],
+				sans: ['Geist', 'sans-serif'],
 			},
 			screens: {
 				'xs': '480px',

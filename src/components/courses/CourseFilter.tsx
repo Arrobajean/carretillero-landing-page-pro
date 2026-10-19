@@ -1,6 +1,4 @@
-
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
+import { Button, Stack } from '@mui/material';
 
 type CourseType = 'all' | 'course' | 'pack' | 'equipment';
 
@@ -18,28 +16,19 @@ const CourseFilter = ({ activeTab, onTabChange }: CourseFilterProps) => {
   ];
 
   return (
-    <div className="relative mb-10">
-      <div className="flex flex-wrap justify-center gap-4">
-        {tabs.map(tab => (
-          <Button
-            key={tab.id}
-            onClick={() => onTabChange(tab.id as CourseType)}
-            variant={activeTab === tab.id ? 'default' : 'outline'}
-            className="rounded-full px-6 relative"
-          >
-            {activeTab === tab.id && (
-              <motion.span
-                layoutId="activePill"
-                className="absolute inset-0 bg-primary rounded-full"
-                transition={{ type: "spring", duration: 0.6 }}
-                style={{ zIndex: -1 }}
-              />
-            )}
-            {tab.label}
-          </Button>
-        ))}
-      </div>
-    </div>
+    <Stack direction="row" flexWrap="wrap" useFlexGap justifyContent="center" gap={2} sx={{ mb: 5 }}>
+      {tabs.map(tab => (
+        <Button
+          key={tab.id}
+          variant={activeTab === tab.id ? 'contained' : 'outlined'}
+          aria-pressed={activeTab === tab.id}
+          onClick={() => onTabChange(tab.id as CourseType)}
+          sx={{ px: 3 }}
+        >
+          {tab.label}
+        </Button>
+      ))}
+    </Stack>
   );
 };
 

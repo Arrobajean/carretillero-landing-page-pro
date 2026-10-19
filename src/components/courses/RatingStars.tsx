@@ -1,34 +1,27 @@
-
-import { Star } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { Rating, Stack, Typography } from '@mui/material';
 
 interface RatingStarsProps {
   rating: number;
-  size?: number;
+  size?: 'small' | 'medium' | 'large';
   showValue?: boolean;
   votes?: number;
-  className?: string;
 }
 
-const RatingStars = ({ rating, size = 18, showValue = true, votes, className }: RatingStarsProps) => {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 >= 0.5;
-  
+const RatingStars = ({ rating, size = 'medium', showValue = true, votes }: RatingStarsProps) => {
   return (
-    <div className={cn("flex items-center gap-1", className)}>
-      {[...Array(fullStars)].map((_, i) => (
-        <Star key={i} size={size} className="fill-yellow-400 text-yellow-400" />
-      ))}
-      {hasHalfStar && (
-        <Star size={size} className="fill-yellow-400 text-yellow-400" />
-      )}
+    <Stack direction="row" alignItems="center" spacing={0.5}>
+      <Rating value={rating} precision={0.1} readOnly size={size} />
       {showValue && (
-        <span className="text-sm font-medium ml-1 text-gray-700">{rating.toFixed(1)}</span>
+        <Typography variant="body2" sx={{ fontWeight: 500, color: 'text.secondary' }}>
+          {rating.toFixed(1)}
+        </Typography>
       )}
       {votes !== undefined && (
-        <span className="text-sm text-gray-500 ml-1">({votes} valoraciones)</span>
+        <Typography variant="body2" color="text.secondary">
+          ({votes} valoraciones)
+        </Typography>
       )}
-    </div>
+    </Stack>
   );
 };
 

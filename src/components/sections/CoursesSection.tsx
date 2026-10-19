@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import {
   Carousel,
   CarouselContent,
@@ -7,13 +8,25 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Button } from "@/components/ui/button";
-import CourseCard from "../CourseCard";
+import CourseCard from "@/components/courses/CourseCard";
 import CourseLocationFilter from "../CourseLocationFilter";
-import { useCoursesFilter } from "@/hooks/useCoursesFilter";
-import { containerStagger, fadeUpItem } from "@/lib/motionVariants";
-const container = containerStagger;
-const item = fadeUpItem;
+import { useCoursesFilter, TabType } from "@/hooks/useCoursesFilter";
+
+// Each card animates its own entrance, so cards that mount after a filter change still appear.
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: (index: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: index * 0.08 },
+  }),
+};
+
+const tabs: { value: TabType; label: string }[] = [
+  { value: "all", label: "Todos" },
+  { value: "courses", label: "Cursos" },
+  { value: "equipment", label: "Equipos" },
+];
 
 const CoursesSection = () => {
   const {
@@ -21,46 +34,53 @@ const CoursesSection = () => {
     setSelectedLocation,
     activeTab,
     setActiveTab,
-    filteredCourses,
+    rankedCourses,
   } = useCoursesFilter();
+  const matchCount = rankedCourses.filter(({ matches }) => matches).length;
 
   return (
-    <section id="courses-section" className="bg-[#fafafa] py-20">
+    <section id="courses-section" className="bg-[#fafafa] py-12">
       <div className="container-section">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="text-center mb-8"
         >
-          <h2 className="heading-lg mb-6">Nuestros Cursos y Equipos</h2>
-          <p className="text-gray-700 max-w-3xl mx-auto mb-8">
-            Descubre nuestra amplia gama de cursos certificados, packs
-            formativos y tipos de equipos diseñados para impulsar tu carrera
-            profesional en el sector logístico e industrial.
-          </p>
+          <Typography variant="h2" sx={{ mb: 3 }}>
+            Cursos, packs y equipos
+          </Typography>
+          <Typography
+            color="text.secondary"
+            sx={{ maxWidth: 768, mx: "auto", mb: 3 }}
+          >
+            Cursos de carretillero, packs con varias formaciones y cursos para
+            equipos concretos: frontal, retráctil, transpaleta, apilador y
+            recogepedidos. Filtra por tipo o por sede.
+          </Typography>
 
           {/* Tabs */}
-          <div className="flex justify-center gap-4 mb-8">
-            {["all", "courses", "equipment"].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab as any)}
-                className={`px-6 py-2 rounded-full transition-all ${
-                  activeTab === tab
-                    ? "bg-primary text-white shadow-md"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
+          <Stack
+            direction="row"
+            flexWrap="wrap"
+            useFlexGap
+            justifyContent="center"
+            gap={2}
+            sx={{ mb: 4 }}
+          >
+            {tabs.map((tab) => (
+              <Button
+                key={tab.value}
+                variant={activeTab === tab.value ? "contained" : "outlined"}
+                aria-pressed={activeTab === tab.value}
+                onClick={() => setActiveTab(tab.value)}
+                sx={{ px: 3 }}
               >
-                {tab === "all"
-                  ? "Todos"
-                  : tab === "courses"
-                  ? "Cursos"
-                  : "Equipos"}
-              </button>
+                {tab.label}
+              </Button>
             ))}
-          </div>
+          </Stack>
 
           {/* Filtro por sede */}
           {activeTab !== "equipment" && (
@@ -71,47 +91,72 @@ const CoursesSection = () => {
           )}
         </motion.div>
 
-        {/* Grid desktop */}
+        {matchCount === 0 && (
+          <Typography color="text.secondary" sx={{ textAlign: "center", mb: 4 }}>
+            Ninguna formación coincide con estos filtros. Prueba otra sede o quita el tipo.
+          </Typography>
+        )}
+
+        {/* Grid desktop: cards reorder with the filters, they are never unmounted */}
         <div className="hidden md:block">
-          <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-            variants={container}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            key={`${activeTab}-${selectedLocation}`}
-          >
-            {filteredCourses.slice(0, 6).map((course) => (
-              <motion.div key={course.id} variants={item}>
-                <CourseCard course={course} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {rankedCourses.slice(0, 8).map(({ item: course, matches }, index) => (
+              <motion.div
+                key={course.id}
+                layout
+                custom={index}
+                variants={cardVariants}
+                initial="hidden"
+                animate="show"
+              >
+                <Box
+                  sx={{
+                    height: "100%",
+                    opacity: matches ? 1 : 0.4,
+                    filter: matches ? "none" : "grayscale(0.6)",
+                    transition: "opacity 400ms, filter 400ms",
+                  }}
+                >
+                  <CourseCard course={course} compact />
+                </Box>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
 
-        {/* Carrusel mobile */}
+        {/* Carrusel mobile: remounted on filter change so the carousel re-initializes */}
         <div className="md:hidden">
-          <Carousel opts={{ align: "start", loop: true }} className="w-full">
+          <Carousel
+            key={`${activeTab}-${selectedLocation}`}
+            opts={{ align: "start", loop: true }}
+            className="w-full"
+          >
             <CarouselContent className="-ml-2 md:-ml-4">
-              {filteredCourses.slice(0, 6).map((course) => (
+              {rankedCourses.slice(0, 8).map(({ item: course, matches }) => (
                 <CarouselItem key={course.id} className="pl-2 basis-full">
-                  <CourseCard course={course} />
+                  <Box sx={{ opacity: matches ? 1 : 0.4, filter: matches ? "none" : "grayscale(0.6)" }}>
+                    <CourseCard course={course} />
+                  </Box>
                 </CarouselItem>
               ))}
             </CarouselContent>
             <div className="flex justify-center mt-8 gap-2">
-              <CarouselPrevious className="static translate-y-0 mx-2" />
-              <CarouselNext className="static translate-y-0 mx-2" />
+              <CarouselPrevious />
+              <CarouselNext />
             </div>
           </Carousel>
         </div>
 
         {/* Botón de ver más */}
-        <div className="flex justify-center mt-12">
-          <Button asChild>
-            <Link to="/cursos" className="px-8 py-6 text-base font-medium">
-              Ver todos los cursos
-            </Link>
+        <div className="flex justify-center mt-8">
+          <Button
+            component={Link}
+            to="/cursos"
+            variant="contained"
+            size="large"
+            sx={{ px: 4 }}
+          >
+            Ver todos los cursos
           </Button>
         </div>
       </div>

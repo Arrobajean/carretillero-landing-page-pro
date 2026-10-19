@@ -1,12 +1,11 @@
 import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbSeparator,
-  BreadcrumbPage,
-} from "@/components/ui/breadcrumb";
-import { FileText } from "lucide-react";
+  Breadcrumbs,
+  Link as MuiLink,
+  Paper,
+  Stack,
+  Typography,
+} from "@mui/material";
+import Description from "@mui/icons-material/Description";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
@@ -15,34 +14,24 @@ const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Header variant="black" />
-      <main className="flex-grow pt-24 pb-16">
+      <main className="flex-grow pt-28 pb-16">
         <div className="container mx-auto px-4 md:px-8">
           {/* Breadcrumb */}
-          <Breadcrumb className="mb-8">
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <Link
-                  to="/"
-                  className="text-sm font-medium underline-offset-4 hover:underline text-muted-foreground"
-                >
-                  Inicio
-                </Link>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>Política de Privacidad</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
+          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+            <MuiLink component={Link} to="/" underline="hover" color="text.secondary" sx={{ fontWeight: 500 }}>
+              Inicio
+            </MuiLink>
+            <Typography sx={{ fontWeight: 500, color: "text.primary" }}>Política de Privacidad</Typography>
+          </Breadcrumbs>
 
           {/* Content card */}
-          <div className="max-w-4xl mx-auto bg-white dark:bg-muted rounded-xl shadow-sm p-6 md:p-8 border border-border">
-            <div className="flex items-center gap-3 mb-6">
-              <FileText className="h-8 w-8 text-primary" />
-              <h1 className="text-3xl font-bold text-foreground">
+          <Paper elevation={1} className="max-w-4xl mx-auto p-6 md:p-8">
+            <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 3 }}>
+              <Description sx={{ fontSize: 32, color: "primary.main" }} />
+              <Typography variant="h3" component="h1" sx={{ fontSize: "1.875rem", color: "text.primary" }}>
                 Política de Privacidad
-              </h1>
-            </div>
+              </Typography>
+            </Stack>
 
             {/* Legal content */}
             <div className="prose prose-gray dark:prose-invert max-w-none text-base leading-relaxed space-y-6">
@@ -206,7 +195,7 @@ const PrivacyPolicy = () => {
                 </div>
               </section>
             </div>
-          </div>
+          </Paper>
         </div>
       </main>
       <Footer />
